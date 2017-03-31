@@ -1,0 +1,161 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp", "ACMESharp\ACMESharp.csproj", "{D551234B-0A8D-4DEE-8178-A81998DF0EDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp-test", "ACMESharp-test\ACMESharp-test.csproj", "{6D7BE73B-B9E7-431A-93AA-C4956B7827C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{2D8381C9-5B29-400B-B86C-4669876052DB}"
+	ProjectSection(SolutionItems) = preProject
+		shared\SharedAssemblyInfo.cs = shared\SharedAssemblyInfo.cs
+		shared\SharedAssemblyVersionInfo.cs = shared\SharedAssemblyVersionInfo.cs
+		shared\SharedGlobalSuppressions.cs = shared\SharedGlobalSuppressions.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.POSH", "ACMESharp.POSH\ACMESharp.POSH.csproj", "{2F8D5934-B5A7-4983-8051-1F25882C7C30}"
+	ProjectSection(ProjectDependencies) = postProject
+		{63AE964A-79A4-4C7D-A686-DD9B2389AF3F} = {63AE964A-79A4-4C7D-A686-DD9B2389AF3F}
+		{F085D9BB-0DF5-442B-8340-6250792A8D7A} = {F085D9BB-0DF5-442B-8340-6250792A8D7A}
+		{944EC9BD-81A1-484E-BA29-360BC155BF51} = {944EC9BD-81A1-484E-BA29-360BC155BF51}
+		{CD8842F7-5CBD-4DB1-B2B9-387A095AB91F} = {CD8842F7-5CBD-4DB1-B2B9-387A095AB91F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.PKI.Providers.OpenSslCli", "ACMESharp.PKI.Providers.OpenSslCli\ACMESharp.PKI.Providers.OpenSslCli.csproj", "{5B454575-9688-4A54-BC2B-2D18A15E452B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.PKI.Providers.OpenSslLib32", "ACMESharp.PKI.Providers.OpenSslLib32\ACMESharp.PKI.Providers.OpenSslLib32.csproj", "{2CE2E059-F228-4F88-8440-0413C1AF2E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.PKI.Providers.OpenSslLib64", "ACMESharp.PKI.Providers.OpenSslLib64\ACMESharp.PKI.Providers.OpenSslLib64.csproj", "{98B532B3-805B-4D81-918E-5A76CC66D40D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.OpenSSL-test", "ACMESharp.OpenSSL-test\ACMESharp.OpenSSL-test.csproj", "{7BC24D16-E849-406D-82E7-26C5E969C493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.Vault", "ACMESharp.Vault\ACMESharp.Vault.csproj", "{65B4C6E0-27A0-445C-ADAC-9D8308E2E4A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.Vault-test", "ACMESharp.Vault-test\ACMESharp.Vault-test.csproj", "{11753766-7B14-4D33-BF2F-11CAAE6C4854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.Providers.AWS", "ACMESharp.Providers.AWS\ACMESharp.Providers.AWS.csproj", "{CD8842F7-5CBD-4DB1-B2B9-387A095AB91F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{551C2059-1DE9-484C-8329-7894DDF57771}"
+	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{A6084888-8C82-4999-880F-2721BF1AA639}"
+	ProjectSection(SolutionItems) = preProject
+		..\ci\av-build.ps1 = ..\ci\av-build.ps1
+		..\ci\av-install.ps1 = ..\ci\av-install.ps1
+		..\ci\av-onfinish.ps1 = ..\ci\av-onfinish.ps1
+		..\ci\version-bump.md = ..\ci\version-bump.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.POSH-test", "ACMESharp.POSH-test\ACMESharp.POSH-test.csproj", "{B3A8DDD2-527E-4A65-AA57-127F2A2D6276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.Providers.IIS", "ACMESharp.Providers.IIS\ACMESharp.Providers.IIS.csproj", "{944EC9BD-81A1-484E-BA29-360BC155BF51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.Providers-test", "ACMESharp.Providers-test\ACMESharp.Providers-test.csproj", "{46933E79-E139-45A0-A321-5EFA7FEC3EE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.Providers.CloudFlare", "ACMESharp.Providers.CloudFlare\ACMESharp.Providers.CloudFlare.csproj", "{63AE964A-79A4-4C7D-A686-DD9B2389AF3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.PKI.Providers.BouncyCastle", "ACMESharp.PKI.Providers.BouncyCastle\ACMESharp.PKI.Providers.BouncyCastle.csproj", "{473BFF7D-C7F0-471D-B7A3-19AD9ADFDBA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "psorg", "psorg", "{4F61BC69-0B98-45E1-87C1-D2BCF0352E06}"
+	ProjectSection(SolutionItems) = preProject
+		..\ci\psorg\PS4-Step0.ps1 = ..\ci\psorg\PS4-Step0.ps1
+		..\ci\psorg\PS4-Step1.ps1 = ..\ci\psorg\PS4-Step1.ps1
+		..\ci\psorg\PS4-Step2.ps1 = ..\ci\psorg\PS4-Step2.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget-staging", "nuget-staging", "{34013351-8A64-4272-AFF0-2ADE706E5019}"
+	ProjectSection(SolutionItems) = preProject
+		..\ci\nuget-staging\AWSPowerShell\AWSPowerShell.psd1 = ..\ci\nuget-staging\AWSPowerShell\AWSPowerShell.psd1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.Providers.Windows", "ACMESharp.Providers.Windows\ACMESharp.Providers.Windows.csproj", "{F085D9BB-0DF5-442B-8340-6250792A8D7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMESharp.PKI.Providers.OpenSslLib", "ACMESharp.PKI.Providers.OpenSslLib\ACMESharp.PKI.Providers.OpenSslLib.csproj", "{86961A92-474A-4C0C-9A7D-F6EDD57EFD56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D551234B-0A8D-4DEE-8178-A81998DF0EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D551234B-0A8D-4DEE-8178-A81998DF0EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D551234B-0A8D-4DEE-8178-A81998DF0EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D551234B-0A8D-4DEE-8178-A81998DF0EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D7BE73B-B9E7-431A-93AA-C4956B7827C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D7BE73B-B9E7-431A-93AA-C4956B7827C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D7BE73B-B9E7-431A-93AA-C4956B7827C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D7BE73B-B9E7-431A-93AA-C4956B7827C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8D5934-B5A7-4983-8051-1F25882C7C30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8D5934-B5A7-4983-8051-1F25882C7C30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8D5934-B5A7-4983-8051-1F25882C7C30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8D5934-B5A7-4983-8051-1F25882C7C30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B454575-9688-4A54-BC2B-2D18A15E452B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B454575-9688-4A54-BC2B-2D18A15E452B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B454575-9688-4A54-BC2B-2D18A15E452B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B454575-9688-4A54-BC2B-2D18A15E452B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE2E059-F228-4F88-8440-0413C1AF2E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE2E059-F228-4F88-8440-0413C1AF2E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE2E059-F228-4F88-8440-0413C1AF2E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE2E059-F228-4F88-8440-0413C1AF2E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B532B3-805B-4D81-918E-5A76CC66D40D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B532B3-805B-4D81-918E-5A76CC66D40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B532B3-805B-4D81-918E-5A76CC66D40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B532B3-805B-4D81-918E-5A76CC66D40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BC24D16-E849-406D-82E7-26C5E969C493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BC24D16-E849-406D-82E7-26C5E969C493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BC24D16-E849-406D-82E7-26C5E969C493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BC24D16-E849-406D-82E7-26C5E969C493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B4C6E0-27A0-445C-ADAC-9D8308E2E4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B4C6E0-27A0-445C-ADAC-9D8308E2E4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B4C6E0-27A0-445C-ADAC-9D8308E2E4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B4C6E0-27A0-445C-ADAC-9D8308E2E4A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11753766-7B14-4D33-BF2F-11CAAE6C4854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11753766-7B14-4D33-BF2F-11CAAE6C4854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11753766-7B14-4D33-BF2F-11CAAE6C4854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11753766-7B14-4D33-BF2F-11CAAE6C4854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD8842F7-5CBD-4DB1-B2B9-387A095AB91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD8842F7-5CBD-4DB1-B2B9-387A095AB91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD8842F7-5CBD-4DB1-B2B9-387A095AB91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD8842F7-5CBD-4DB1-B2B9-387A095AB91F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A8DDD2-527E-4A65-AA57-127F2A2D6276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A8DDD2-527E-4A65-AA57-127F2A2D6276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A8DDD2-527E-4A65-AA57-127F2A2D6276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A8DDD2-527E-4A65-AA57-127F2A2D6276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944EC9BD-81A1-484E-BA29-360BC155BF51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944EC9BD-81A1-484E-BA29-360BC155BF51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944EC9BD-81A1-484E-BA29-360BC155BF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944EC9BD-81A1-484E-BA29-360BC155BF51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46933E79-E139-45A0-A321-5EFA7FEC3EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46933E79-E139-45A0-A321-5EFA7FEC3EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46933E79-E139-45A0-A321-5EFA7FEC3EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46933E79-E139-45A0-A321-5EFA7FEC3EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AE964A-79A4-4C7D-A686-DD9B2389AF3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AE964A-79A4-4C7D-A686-DD9B2389AF3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AE964A-79A4-4C7D-A686-DD9B2389AF3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AE964A-79A4-4C7D-A686-DD9B2389AF3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473BFF7D-C7F0-471D-B7A3-19AD9ADFDBA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473BFF7D-C7F0-471D-B7A3-19AD9ADFDBA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473BFF7D-C7F0-471D-B7A3-19AD9ADFDBA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473BFF7D-C7F0-471D-B7A3-19AD9ADFDBA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F085D9BB-0DF5-442B-8340-6250792A8D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F085D9BB-0DF5-442B-8340-6250792A8D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F085D9BB-0DF5-442B-8340-6250792A8D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F085D9BB-0DF5-442B-8340-6250792A8D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86961A92-474A-4C0C-9A7D-F6EDD57EFD56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86961A92-474A-4C0C-9A7D-F6EDD57EFD56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86961A92-474A-4C0C-9A7D-F6EDD57EFD56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86961A92-474A-4C0C-9A7D-F6EDD57EFD56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6084888-8C82-4999-880F-2721BF1AA639} = {551C2059-1DE9-484C-8329-7894DDF57771}
+		{4F61BC69-0B98-45E1-87C1-D2BCF0352E06} = {A6084888-8C82-4999-880F-2721BF1AA639}
+		{34013351-8A64-4272-AFF0-2ADE706E5019} = {A6084888-8C82-4999-880F-2721BF1AA639}
+	EndGlobalSection
+EndGlobal

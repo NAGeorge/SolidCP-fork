@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D551234B-0A8D-4DEE-8178-A81998DF0EDB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ACMESharp</RootNamespace>
+    <AssemblyName>ACMESharp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.4\lib\net45\AWSSDK.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AWSSDK.Route53, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Route53.3.3.1.1\lib\net45\AWSSDK.Route53.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.S3.3.3.1.1\lib\net45\AWSSDK.S3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\shared\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\shared\SharedAssemblyVersionInfo.cs">
+      <Link>Properties\SharedAssemblyVersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\shared\SharedGlobalSuppressions.cs">
+      <Link>Properties\SharedGlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="AcmeClient.cs" />
+    <Compile Include="AcmeProtocol.cs" />
+    <Compile Include="AcmeException.cs" />
+    <Compile Include="AcmeRegistration.cs" />
+    <Compile Include="AcmeServerDirectory.cs" />
+    <Compile Include="ACME\Challenge.cs" />
+    <Compile Include="ACME\ChallengeDecoderProviderAttribute.cs" />
+    <Compile Include="ACME\ChallengeHandlerExtManager.cs" />
+    <Compile Include="ACME\ChallengeDecoderExtManager.cs" />
+    <Compile Include="ACME\ChallengeAnswer.cs" />
+    <Compile Include="ACME\ChallengeHandlerProviderAttribute.cs" />
+    <Compile Include="ACME\IChallengeDecoderProviderInfo.cs" />
+    <Compile Include="ACME\IChallengeHandlerProviderInfo.cs" />
+    <Compile Include="ACME\Providers\DnsChallengeDecoder.cs" />
+    <Compile Include="ACME\IChallengeHandler.cs" />
+    <Compile Include="ACME\IChallengeDecoder.cs" />
+    <Compile Include="ACME\Providers\DnsChallengeDecoderProvider.cs" />
+    <Compile Include="ACME\Providers\HttpChallengeDecoder.cs" />
+    <Compile Include="ACME\Providers\HttpChallengeDecoderProvider.cs" />
+    <Compile Include="ACME\Providers\ManualChallengeHandler.cs" />
+    <Compile Include="ACME\Providers\ManualChallengeHandlerProvider.cs" />
+    <Compile Include="Certificate.cs" />
+    <Compile Include="AuthorizationState.cs" />
+    <Compile Include="CertificateRequest.cs" />
+    <Compile Include="DNS\AwsRoute53DnsProvider.cs" />
+    <Compile Include="DNS\DnsInfo.cs" />
+    <Compile Include="DNS\IDnsProvider.cs" />
+    <Compile Include="DNS\ManualDnsProvider.cs" />
+    <Compile Include="Ext\ExtCommon.cs" />
+    <Compile Include="Ext\ExtRegistry.cs" />
+    <Compile Include="Ext\IAliasesSupported.cs" />
+    <Compile Include="Ext\IExtDetail.cs" />
+    <Compile Include="Ext\ExtManagerAttribute.cs" />
+    <Compile Include="Ext\NamedInfo.cs" />
+    <Compile Include="Ext\ParameterDetail.cs" />
+    <Compile Include="HTTP\Link.cs" />
+    <Compile Include="HTTP\LinkCollection.cs" />
+    <Compile Include="Installer\IInstaller.cs" />
+    <Compile Include="Installer\IInstallerProvider.cs" />
+    <Compile Include="Installer\IInstallerProviderInfo.cs" />
+    <Compile Include="Installer\InstallerExtManager.cs" />
+    <Compile Include="Installer\InstallerProviderAttribute.cs" />
+    <Compile Include="JOSE\ISigner.cs" />
+    <Compile Include="JOSE\JwsHeaders.cs" />
+    <Compile Include="JOSE\JwsHelper.cs" />
+    <Compile Include="JOSE\RS256Signer.cs" />
+    <Compile Include="JSON\AcmeJsonContractResolver.cs" />
+    <Compile Include="Messages\AnswerDnsChallengeRequest.cs" />
+    <Compile Include="Messages\ChallengeAnswerRequest.cs" />
+    <Compile Include="Messages\ChallengePart.cs" />
+    <Compile Include="Messages\IdentifierPart.cs" />
+    <Compile Include="Messages\NewAuthzRequest.cs" />
+    <Compile Include="Messages\AuthzStatusResponse.cs" />
+    <Compile Include="Messages\NewAuthzResponse.cs" />
+    <Compile Include="Messages\NewCertRequest.cs" />
+    <Compile Include="Messages\ProblemDetailResponse.cs" />
+    <Compile Include="Messages\RegResponse.cs" />
+    <Compile Include="Messages\UpdateRegRequest.cs" />
+    <Compile Include="Messages\AnswerHttpChallengeRequest.cs" />
+    <Compile Include="PKI\Crt.cs" />
+    <Compile Include="PKI\Csr.cs" />
+    <Compile Include="PKI\CsrDetails.cs" />
+    <Compile Include="PKI\CsrHelper.cs" />
+    <Compile Include="PKI\CertificateProvider.cs" />
+    <Compile Include="PKI\CsrParams.cs" />
+    <Compile Include="PKI\EC\EcPrivateKey.cs" />
+    <Compile Include="PKI\EC\EcPrivateKeyParams.cs" />
+    <Compile Include="PKI\IPkiTool.cs" />
+    <Compile Include="PKI\IPkiToolProvider.cs" />
+    <Compile Include="PKI\IPkiToolProviderInfo.cs" />
+    <Compile Include="PKI\PkiFormats.cs" />
+    <Compile Include="PKI\PkiToolProviderAttribute.cs" />
+    <Compile Include="PKI\PkiToolExtManager.cs" />
+    <Compile Include="PKI\PrivateKey.cs" />
+    <Compile Include="PKI\Providers\PkiToolBase.cs" />
+    <Compile Include="PKI\RSA\RsaPrivateKey.cs" />
+    <Compile Include="PKI\RSA\RsaPrivateKeyParams.cs" />
+    <Compile Include="RequestMessage.cs" />
+    <Compile Include="Messages\NewRegRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AuthorizeChallenge.cs" />
+    <Compile Include="Util\BaseManualProvider.cs" />
+    <Compile Include="Util\TemporaryFile.cs" />
+    <Compile Include="Util\ExceptionExtensions.cs" />
+    <Compile Include="Util\JsonHelper.cs" />
+    <Compile Include="Util\StringHelper.cs" />
+    <Compile Include="Util\SysHelper.cs" />
+    <Compile Include="WebServer\AwsS3WebServerProvider.cs" />
+    <Compile Include="WebServer\IWebServerProvider.cs" />
+    <Compile Include="WebServer\ManualWebServerProvider.cs" />
+    <Compile Include="WebServer\IisSitePathProvider.cs" />
+    <Compile Include="WebServer\WebServerInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ACMESharp.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebServer\IisSitePathProvider-WebConfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.Route53.3.3.1.1\analyzers\dotnet\cs\AWSSDK.Route53.CodeAnalysis.dll" />
+    <Analyzer Include="..\packages\AWSSDK.S3.3.3.1.1\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
