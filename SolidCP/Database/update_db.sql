@@ -168,10 +168,9 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'SSLCertificates' AND  COLUMN_NAME = 'IsLetsEncryptCertificate')
+IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'SSLCertificates' AND COLUMN_NAME = 'IsLetsEncryptCertificate')
 BEGIN
-ALTER TABLE [dbo].[SSLCertificates] ADD [IsLetsEncryptCertificate] [bit] NOT NULL, [SAN] [nvarchar](max) NULL;
-ALTER TABLE [dbo].[SSLCertificates] ADD  DEFAULT ((0)) FOR [IsLetsEncryptCertificate]
+ALTER TABLE [dbo].[SSLCertificates] ADD [IsLetsEncryptCertificate] [bit] NOT NULL DEFAULT ((0)), [SAN] [nvarchar](max) NULL;
 END
 GO
 
