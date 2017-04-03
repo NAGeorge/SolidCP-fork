@@ -4705,10 +4705,6 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
 				WebServer server = GetWebServer(item.ServiceId);
 				TaskManager.WriteParameter("item.ServiceId", item.ServiceId);
 
-                // remove all web site pointers
-                List<DomainInfo> pointers = GetWebSitePointers(siteItemId);
-                foreach (DomainInfo pointer in pointers)
-                    DeleteWebSitePointer(siteItemId, pointer.DomainId, true, true, true);
 
                 // Get certificateinfo to delete from metabase later, SCP expects only one active certificate for each site
                 var certificatesToDeleteFromMetaBase = GetCertificatesForSite(item.Id).Where(c => c.Installed).ToList();
