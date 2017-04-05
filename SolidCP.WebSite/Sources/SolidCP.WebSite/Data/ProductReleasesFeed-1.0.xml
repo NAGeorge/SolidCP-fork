@@ -14,20 +14,6 @@
         <installerPath>setup\setup.dll</installerPath>
         <installerType>SolidCP.Setup.StandaloneServerSetup120</installerType>
       </release>
-      <release version="1.1.4" date="14/03/2017" available="true" beta="false">
-        <releaseFileID>114</releaseFileID>
-        <fullFilePath>~/Files/1.1.4/SolidCP-StandaloneServerSetup.zip</fullFilePath>
-        <upgradeFilePath></upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.StandaloneServerSetup114</installerType>
-      </release>
-    <release version="1.1.3" date="05/01/2017" available="true" beta="false">
-        <releaseFileID>113</releaseFileID>
-        <fullFilePath>~/Files/1.1.3/SolidCP-StandaloneServerSetup.zip</fullFilePath>
-        <upgradeFilePath></upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.StandaloneServerSetup113</installerType>
-      </release>
   <release version="1.1.2" date="09/11/2016" available="true" beta="false">
         <releaseFileID>112</releaseFileID>
         <fullFilePath>~/Files/1.1.2/SolidCP-StandaloneServerSetup.zip</fullFilePath>
@@ -83,20 +69,6 @@
         <upgradeFilePath>~/Files/1.2.0/SolidCP-Portal-Update.zip</upgradeFilePath>
         <installerPath>setup\setup.dll</installerPath>
         <installerType>SolidCP.Setup.Portal120</installerType>
-      </release>
-      <release version="1.1.4" date="14/03/2017" available="true" beta="false">
-        <releaseFileID>214</releaseFileID>
-        <fullFilePath>~/Files/1.1.4/SolidCP-Portal.zip</fullFilePath>
-        <upgradeFilePath>~/Files/1.1.4/SolidCP-Portal-Update.zip</upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.Portal114</installerType>
-      </release>
-  <release version="1.1.3" date="05/01/2017" available="true" beta="false">
-        <releaseFileID>213</releaseFileID>
-        <fullFilePath>~/Files/1.1.3/SolidCP-Portal.zip</fullFilePath>
-        <upgradeFilePath>~/Files/1.1.3/SolidCP-Portal-Update.zip</upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.Portal113</installerType>
       </release>
   <release version="1.1.2" date="09/11/2016" available="true" beta="false">
         <releaseFileID>212</releaseFileID>
@@ -154,20 +126,6 @@
         <installerPath>setup\setup.dll</installerPath>
         <installerType>SolidCP.Setup.EnterpriseServer120</installerType>
       </release>
-      <release version="1.1.4" date="14/03/2017" available="true" beta="false">
-        <releaseFileID>314</releaseFileID>
-        <fullFilePath>~/Files/1.1.4/SolidCP-EnterpriseServer.zip</fullFilePath>
-        <upgradeFilePath>~/Files/1.1.4/SolidCP-EnterpriseServer-Update.zip</upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.EnterpriseServer114</installerType>
-      </release>
-  <release version="1.1.3" date="05/01/2017" available="true" beta="false">
-        <releaseFileID>313</releaseFileID>
-        <fullFilePath>~/Files/1.1.3/SolidCP-EnterpriseServer.zip</fullFilePath>
-        <upgradeFilePath>~/Files/1.1.3/SolidCP-EnterpriseServer-Update.zip</upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.EnterpriseServer113</installerType>
-      </release>
   <release version="1.1.2" date="09/11/2016" available="true" beta="false">
         <releaseFileID>312</releaseFileID>
         <fullFilePath>~/Files/1.1.2/SolidCP-EnterpriseServer.zip</fullFilePath>
@@ -224,20 +182,6 @@
         <installerPath>setup\setup.dll</installerPath>
         <installerType>SolidCP.Setup.Server120</installerType>
       </release>
-      <release version="1.1.4" date="14/03/2017" available="true" beta="false">
-        <releaseFileID>414</releaseFileID>
-        <fullFilePath>~/Files/1.1.4/SolidCP-Server.zip</fullFilePath>
-        <upgradeFilePath>~/Files/1.1.4/SolidCP-Server-Update.zip</upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.Server114</installerType>
-      </release>
-  <release version="1.1.3" date="05/01/2017" available="true" beta="false">
-        <releaseFileID>413</releaseFileID>
-        <fullFilePath>~/Files/1.1.3/SolidCP-Server.zip</fullFilePath>
-        <upgradeFilePath>~/Files/1.1.3/SolidCP-Server-Update.zip</upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.Server113</installerType>
-      </release>
   <release version="1.1.2" date="09/11/2016" available="true" beta="false">
         <releaseFileID>412</releaseFileID>
         <fullFilePath>~/Files/1.1.2/SolidCP-Server.zip</fullFilePath>
@@ -292,20 +236,6 @@
         <upgradeFilePath></upgradeFilePath>
         <installerPath>setup\setup.dll</installerPath>
         <installerType>SolidCP.Setup.WebDavPortal120</installerType>
-      </release>
-      <release version="1.1.4" date="14/03/2017" available="true" beta="false">
-        <releaseFileID>514</releaseFileID>
-        <fullFilePath>~/Files/1.1.4/SolidCP-Web-Dav-Portal.zip</fullFilePath>
-        <upgradeFilePath></upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.WebDavPortal114</installerType>
-      </release>
-  <release version="1.1.3" date="05/01/2017" available="true" beta="false">
-        <releaseFileID>513</releaseFileID>
-        <fullFilePath>~/Files/1.1.3/SolidCP-Web-Dav-Portal.zip</fullFilePath>
-        <upgradeFilePath></upgradeFilePath>
-        <installerPath>setup\setup.dll</installerPath>
-        <installerType>SolidCP.Setup.WebDavPortal113</installerType>
       </release>
   <release version="1.1.2" date="09/11/2016" available="true" beta="false">
         <releaseFileID>512</releaseFileID>
