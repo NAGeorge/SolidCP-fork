@@ -11848,7 +11848,9 @@ GO
 
 IF NOT EXISTS (SELECT * FROM [dbo].[Providers] WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2013')
 BEGIN
-INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1552, 51, N'HostedSharePoint2013Ent', N'Hosted SharePoint Enterprise 2013', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2013Ent, SolidCP.Providers.HostedSolution.SharePoint2013Ent', N'HostedSharePoint30', NULL)
+DECLARE @group_id AS INT
+SELECT @group_id = GroupId FROM [dbo].[ResourceGroups] WHERE GroupName = 'Sharepoint Enterprise Server'
+INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1552, @group_id, N'HostedSharePoint2013Ent', N'Hosted SharePoint Enterprise 2013', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2013Ent, SolidCP.Providers.HostedSolution.SharePoint2013Ent', N'HostedSharePoint30', NULL)
 END
 ELSE
 BEGIN
@@ -11858,7 +11860,9 @@ GO
 
 IF NOT EXISTS (SELECT * FROM [dbo].[Providers] WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2016')
 BEGIN
-INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1702, 51, N'HostedSharePoint2016Ent', N'Hosted SharePoint Enterprise 2016', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2016Ent, SolidCP.Providers.HostedSolution.SharePoint2016Ent', N'HostedSharePoint30', NULL)
+DECLARE @group_id AS INT
+SELECT @group_id = GroupId FROM [dbo].[ResourceGroups] WHERE GroupName = 'Sharepoint Enterprise Server'
+INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1702, @group_id, N'HostedSharePoint2016Ent', N'Hosted SharePoint Enterprise 2016', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2016Ent, SolidCP.Providers.HostedSolution.SharePoint2016Ent', N'HostedSharePoint30', NULL)
 END
 ELSE
 BEGIN
