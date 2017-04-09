@@ -1,3 +1,11 @@
+--
+--
+--
+-- Please do NOT add to this file. It is now archived for 1.2.0 released on 1st April 2017
+--
+--
+--
+
 USE [${install.database}]
 GO
 -- update database version
@@ -11840,23 +11848,21 @@ GO
 
 IF NOT EXISTS (SELECT * FROM [dbo].[Providers] WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2013')
 BEGIN
-DECLARE @provider_id AS INT
-DECLARE @group_id AS INT
-SELECT @group_id = GroupId FROM [dbo].[ResourceGroups] WHERE GroupName = 'Sharepoint Enterprise Server'
-SELECT TOP 1 @provider_id = ProviderId + 1 From [dbo].[Providers] ORDER BY ProviderID DESC
-INSERT [dbo].[Providers] ([ProviderID], [GroupID], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery])
-VALUES (@provider_id, @group_id, N'HostedSharePoint2013Ent', N'Hosted SharePoint Enterprise 2013', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2013Ent, SolidCP.Providers.HostedSolution.SharePoint2013Ent', N'HostedSharePoint30', NULL)
+INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1552, 51, N'HostedSharePoint2013Ent', N'Hosted SharePoint Enterprise 2013', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2013Ent, SolidCP.Providers.HostedSolution.SharePoint2013Ent', N'HostedSharePoint30', NULL)
+END
+ELSE
+BEGIN
+UPDATE [dbo].[Providers] SET [DisableAutoDiscovery] = NULL WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2013'
 END
 GO
 
 IF NOT EXISTS (SELECT * FROM [dbo].[Providers] WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2016')
 BEGIN
-DECLARE @provider_id AS INT
-DECLARE @group_id AS INT
-SELECT @group_id = GroupId FROM [dbo].[ResourceGroups] WHERE GroupName = 'Sharepoint Enterprise Server'
-SELECT TOP 1 @provider_id = ProviderId + 1 From [dbo].[Providers] ORDER BY ProviderID DESC
-INSERT [dbo].[Providers] ([ProviderID], [GroupID], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery])
-VALUES (@provider_id, @group_id, N'HostedSharePoint2016Ent', N'Hosted SharePoint Enterprise 2016', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2016Ent, SolidCP.Providers.HostedSolution.SharePoint2016Ent', N'HostedSharePoint30', NULL)
+INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1702, 51, N'HostedSharePoint2016Ent', N'Hosted SharePoint Enterprise 2016', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2016Ent, SolidCP.Providers.HostedSolution.SharePoint2016Ent', N'HostedSharePoint30', NULL)
+END
+ELSE
+BEGIN
+UPDATE [dbo].[Providers] SET [DisableAutoDiscovery] = NULL WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2016'
 END
 GO
 
@@ -18791,3 +18797,55 @@ INSERT INTO [dbo].[UserSettings] ([UserID],[SettingsName],[PropertyName],[Proper
 </xsl:stylesheet>'),
 			(1,'DiskspaceXLST','TransformSuffix','.htm'),
 			(1,'DiskspaceXLST','TransformContentType','text/html')
+
+			
+-- Fix for SP2013 wrong ProviderID
+
+IF NOT EXISTS (SELECT * FROM [dbo].[Providers] WHERE [ProviderID] = '1552' AND [DisplayName] = 'Hosted SharePoint Enterprise 2013')
+BEGIN
+INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1552, 51, N'HostedSharePoint2013Ent', N'Hosted SharePoint Enterprise 2013', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2013Ent, SolidCP.Providers.HostedSolution.SharePoint2013Ent', N'HostedSharePoint30', NULL)
+END
+ELSE
+BEGIN
+UPDATE [dbo].[Providers] SET [DisableAutoDiscovery] = NULL WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2013'
+END
+GO
+
+IF EXISTS (SELECT * FROM [dbo].[Providers] WHERE DisplayName = 'Hosted SharePoint Enterprise 2013' AND NOT ProviderID = '1552')
+BEGIN
+DECLARE @SP2013provider_id INT
+SET @SP2013provider_id = (SELECT ProviderID FROM [dbo].[Providers] WHERE DisplayName = 'Hosted SharePoint Enterprise 2013' AND NOT ProviderID = '1552')
+UPDATE [ServiceDefaultProperties] SET [ProviderID]='1552' WHERE [ProviderID] = @SP2013provider_id
+UPDATE [Services] SET [ProviderID]='1552' WHERE [ProviderID] = @SP2013provider_id
+DELETE FROM [Providers] WHERE [ProviderID] = @SP2013provider_id AND DisplayName = 'Hosted SharePoint Enterprise 2013'
+END
+GO
+
+-- Fix for SP2016 wrong ProviderID
+
+IF NOT EXISTS (SELECT * FROM [dbo].[Providers] WHERE [ProviderID] = '1702' AND [DisplayName] = 'Hosted SharePoint Enterprise 2016')
+BEGIN
+INSERT [dbo].[Providers] ([ProviderId], [GroupId], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES(1702, 51, N'HostedSharePoint2016Ent', N'Hosted SharePoint Enterprise 2016', N'SolidCP.Providers.HostedSolution.HostedSharePointServer2016Ent, SolidCP.Providers.HostedSolution.SharePoint2016Ent', N'HostedSharePoint30', NULL)
+END
+ELSE
+BEGIN
+UPDATE [dbo].[Providers] SET [DisableAutoDiscovery] = NULL WHERE [DisplayName] = 'Hosted SharePoint Enterprise 2016'
+END
+GO
+
+IF EXISTS (SELECT * FROM [dbo].[Providers] WHERE DisplayName = 'Hosted SharePoint Enterprise 2016' AND NOT ProviderID = '1702')
+BEGIN
+DECLARE @SP2016provider_id INT
+SET @SP2016provider_id = (SELECT ProviderID FROM [dbo].[Providers] WHERE DisplayName = 'Hosted SharePoint Enterprise 2016' AND NOT ProviderID = '1702')
+UPDATE [ServiceDefaultProperties] SET [ProviderID]='1702' WHERE [ProviderID] = @SP2016provider_id
+UPDATE [Services] SET [ProviderID]='1702' WHERE [ProviderID] = @SP2016provider_id
+DELETE FROM [Providers] WHERE [ProviderID] = @SP2016provider_id AND DisplayName = 'Hosted SharePoint Enterprise 2016'
+END
+GO
+
+-- SimpleDNS 6.x
+IF NOT EXISTS (SELECT * FROM [dbo].[Providers] WHERE [ProviderID] = '1703' AND DisplayName = 'SimpleDNS Plus 6.x')
+BEGIN
+INSERT [dbo].[Providers] ([ProviderID], [GroupID], [ProviderName], [DisplayName], [ProviderType], [EditorControl], [DisableAutoDiscovery]) VALUES (1703, 7, N'SimpleDNS', N'SimpleDNS Plus 6.x', N'SolidCP.Providers.DNS.SimpleDNS6, SolidCP.Providers.DNS.SimpleDNS60', N'SimpleDNS', NULL)
+END
+GO
