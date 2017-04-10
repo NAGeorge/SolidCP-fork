@@ -644,7 +644,7 @@ namespace SolidCP.EnterpriseServer
         }
 
         public static int AddIPAddress(int poolId, int serverId, string externalIP, string internalIP,
-            string subnetMask, string defaultGateway, string comments)
+            string subnetMask, string defaultGateway, string comments, int VLAN)
         {
             SqlParameter prmAddresId = new SqlParameter("@AddressID", SqlDbType.Int);
             prmAddresId.Direction = ParameterDirection.Output;
@@ -658,13 +658,14 @@ namespace SolidCP.EnterpriseServer
                 new SqlParameter("@PoolId", poolId),
                 new SqlParameter("@SubnetMask", subnetMask),
                 new SqlParameter("@DefaultGateway", defaultGateway),
-                new SqlParameter("@Comments", comments));
+                new SqlParameter("@Comments", comments),
+                new SqlParameter("@VLAN", VLAN));
 
             return Convert.ToInt32(prmAddresId.Value);
         }
 
         public static void UpdateIPAddress(int addressId, int poolId, int serverId,
-            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments)
+            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN)
         {
             SqlHelper.ExecuteNonQuery(ConnectionString, CommandType.StoredProcedure,
                 ObjectQualifier + "UpdateIPAddress",
@@ -675,11 +676,12 @@ namespace SolidCP.EnterpriseServer
                 new SqlParameter("@PoolId", poolId),
                 new SqlParameter("@SubnetMask", subnetMask),
                 new SqlParameter("@DefaultGateway", defaultGateway),
-                new SqlParameter("@Comments", comments));
+                new SqlParameter("@Comments", comments),
+                new SqlParameter("@VLAN", VLAN));
         }
 
         public static void UpdateIPAddresses(string xmlIds, int poolId, int serverId,
-            string subnetMask, string defaultGateway, string comments)
+            string subnetMask, string defaultGateway, string comments, int VLAN)
         {
             SqlHelper.ExecuteNonQuery(ConnectionString, CommandType.StoredProcedure,
                 ObjectQualifier + "UpdateIPAddresses",
@@ -688,7 +690,8 @@ namespace SolidCP.EnterpriseServer
                 new SqlParameter("@PoolId", poolId),
                 new SqlParameter("@SubnetMask", subnetMask),
                 new SqlParameter("@DefaultGateway", defaultGateway),
-                new SqlParameter("@Comments", comments));
+                new SqlParameter("@Comments", comments),
+                new SqlParameter("@VLAN", VLAN));
         }
 
         public static int DeleteIPAddress(int ipAddressId)
@@ -3651,6 +3654,23 @@ namespace SolidCP.EnterpriseServer
                                         new SqlParameter("@Recursive", recursive));
             return reader;
         }
+
+        public static IDataReader GetVirtualMachinesPagedProxmox(int actorId, int packageId, string filterColumn, string filterValue,
+            string sortColumn, int startRow, int maximumRows, bool recursive)
+        {
+            IDataReader reader = SqlHelper.ExecuteReader(ConnectionString, CommandType.StoredProcedure,
+                                     "GetVirtualMachinesPagedProxmox",
+                                        new SqlParameter("@ActorID", actorId),
+                                        new SqlParameter("@PackageID", packageId),
+                                        new SqlParameter("@FilterColumn", VerifyColumnName(filterColumn)),
+                                        new SqlParameter("@FilterValue", VerifyColumnValue(filterValue)),
+                                        new SqlParameter("@SortColumn", VerifyColumnName(sortColumn)),
+                                        new SqlParameter("@StartRow", startRow),
+                                        new SqlParameter("@MaximumRows", maximumRows),
+                                        new SqlParameter("@Recursive", recursive));
+            return reader;
+        }
+
         #endregion
 
         public static IDataReader GetVirtualMachinesForPCPaged(int actorId, int packageId, string filterColumn, string filterValue,

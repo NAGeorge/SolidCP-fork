@@ -128,7 +128,7 @@ namespace SolidCP.Portal
                     {
                         // add IP range
                         ResultObject res = ES.Services.Servers.AddIPAddressesRange(pool, serverId, start, end,
-                            "", "", "", comments);
+                            "", "", "", comments, 0);
                         if (!res.IsSuccess)
                         {
                             // show error
@@ -150,7 +150,7 @@ namespace SolidCP.Portal
                     try
                     {
                         IntResult res = ES.Services.Servers.AddIPAddress(pool, serverId, start,
-                            "", "", "", comments);
+                            "", "", "", comments, 0);
                         if (!res.IsSuccess)
                         {
                             messageBox.ShowMessage(res, errorKey, "IP");

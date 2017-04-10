@@ -5317,8 +5317,14 @@
   <data name="Quota.VPSForPC.StartShutdownAllowed" xml:space="preserve">
     <value>Allow user to Start, Turn off VPS</value>
   </data>
+  <data name="ResourceGroup.Proxmox" xml:space="preserve">
+    <value>Virtual Proxmox Servers</value>
+  </data>
   <data name="ResourceGroup.VPS2012" xml:space="preserve">
     <value>Virtual Private Servers 2012</value>
+  </data>
+  <data name="AuditLogSource.Proxmox" xml:space="preserve">
+    <value>Virtual Proxmox Servers</value>
   </data>
   <data name="AuditLogSource.VPS2012" xml:space="preserve">
     <value>Virtual Private Servers 2012</value>
@@ -6264,6 +6270,9 @@
   </data>
   <data name="Error.FILES_INCORRECT_FOLDER_NAME" xml:space="preserve">
     <value>Error! Incorrect folder name</value>
+  </data>
+  <data name="SchedulerTask.SCHEDULE_TASK_VPS_SNAPSHOT" xml:space="preserve">
+    <value>VPS Snapshot</value>
   </data>
   <data name="ServiceItemType.MariaDBUser" xml:space="preserve">
     <value>MariaDB User</value>

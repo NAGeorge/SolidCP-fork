@@ -62,6 +62,8 @@ namespace SolidCP.EnterpriseServer
         public string DefaultGateway { get; set; }
         public string Comments { get; set; }
 
+        public int VLAN { get; set; }
+
         public IPAddressPool Pool
         {
             get { return (IPAddressPool)PoolId; }

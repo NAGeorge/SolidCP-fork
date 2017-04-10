@@ -33,13 +33,11 @@
                 <asp:Localize ID="lblExternalIP" runat="server" meta:resourcekey="lblExternalIP" Text="IP Address:"></asp:Localize>
 		    </td>
 		    <td>
-                <div class="form-inline">
 		        <scp:EditIPAddressControl id="startIP" runat="server" ValidationGroup="EditAddress" Required="true" AllowSubnet="true" />
 			    &nbsp;
                 <asp:Localize ID="locTo" runat="server" meta:resourcekey="locTo" Text="to"></asp:Localize>
                 &nbsp;
 		        <scp:EditIPAddressControl id="endIP" runat="server" ValidationGroup="EditAddress" />
-                </div>
 		    </td>
 	    </tr>
 	    <tr id="InternalAddressRow" runat="server">
@@ -64,6 +62,12 @@
 	        </td>
 	        <td class="NormalBold">
 	            <scp:EditIPAddressControl id="defaultGateway" runat="server" ValidationGroup="EditAddress" Required="true"  />
+            </td>
+        </tr>
+        <tr id="VLANRow" runat="server">
+	        <td><asp:Localize ID="locVLAN" runat="server" meta:resourcekey="locVLAN" Text="VLAN:"></asp:Localize></td>
+	        <td class="NormalBold">
+	            <scp:EditIPAddressControl id="VLAN" runat="server" Required="true" Text="" />
             </td>
         </tr>
 	    <tr>

@@ -211,6 +211,7 @@
     <Compile Include="Code\Helpers\UsersHelper.cs" />
     <Compile Include="Code\Helpers\VirtualMachines2012Helper.cs" />
     <Compile Include="Code\Helpers\VirtualMachinesHelper.cs" />
+    <Compile Include="Code\Helpers\VirtualMachinesProxmoxHelper.cs" />
     <Compile Include="Code\Helpers\WebAppGalleryHelpers.cs" />
     <Compile Include="Code\ProviderControls\IDatabaseEditDatabaseControl.cs" />
     <Compile Include="Code\ProviderControls\IDatabaseEditUserControl.cs" />
@@ -234,12 +235,263 @@
     <Compile Include="Code\ReportingServices\ReportingServicesUtils.cs" />
     <Compile Include="Code\UserControls\Tab.cs" />
     <Compile Include="App_Code\IPAddressExtensions.cs" />
+    <Compile Include="ProviderControls\Proxmox_Settings.ascx.cs">
+      <DependentUpon>Proxmox_Settings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProviderControls\Proxmox_Settings.ascx.designer.cs">
+      <DependentUpon>Proxmox_Settings.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ProviderControls\SpamExperts_Settings.ascx.cs">
       <DependentUpon>SpamExperts_Settings.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ProviderControls\SpamExperts_Settings.ascx.designer.cs">
       <DependentUpon>SpamExperts_Settings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\RemoteControl\Connect.aspx.cs">
+      <DependentUpon>Connect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\RemoteControl\Connect.aspx.designer.cs">
+      <DependentUpon>Connect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\TestVirtualMachineTemplate.aspx.cs">
+      <DependentUpon>TestVirtualMachineTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\TestVirtualMachineTemplate.aspx.designer.cs">
+      <DependentUpon>TestVirtualMachineTemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\Breadcrumb.ascx.cs">
+      <DependentUpon>Breadcrumb.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\Breadcrumb.ascx.designer.cs">
+      <DependentUpon>Breadcrumb.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\DynamicMemoryControl.ascx.cs">
+      <DependentUpon>DynamicMemoryControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\DynamicMemoryControl.ascx.designer.cs">
+      <DependentUpon>DynamicMemoryControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\FormTitle.ascx.cs">
+      <DependentUpon>FormTitle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\FormTitle.ascx.designer.cs">
+      <DependentUpon>FormTitle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\Generation.ascx.cs">
+      <DependentUpon>Generation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\Generation.ascx.designer.cs">
+      <DependentUpon>Generation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\Menu.ascx.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\Menu.ascx.designer.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\ServerTabs.ascx.cs">
+      <DependentUpon>ServerTabs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\UserControls\ServerTabs.ascx.designer.cs">
+      <DependentUpon>ServerTabs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcAddExternalAddress.ascx.cs">
+      <DependentUpon>VdcAddExternalAddress.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcAddExternalAddress.ascx.designer.cs">
+      <DependentUpon>VdcAddExternalAddress.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcAuditLog.ascx.cs">
+      <DependentUpon>VdcAuditLog.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcAuditLog.ascx.designer.cs">
+      <DependentUpon>VdcAuditLog.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcCreateServer.ascx.cs">
+      <DependentUpon>VdcCreateServer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcCreateServer.ascx.designer.cs">
+      <DependentUpon>VdcCreateServer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcExternalNetwork.ascx.cs">
+      <DependentUpon>VdcExternalNetwork.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcExternalNetwork.ascx.designer.cs">
+      <DependentUpon>VdcExternalNetwork.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcHome.ascx.cs">
+      <DependentUpon>VdcHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcHome.ascx.designer.cs">
+      <DependentUpon>VdcHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcImportServer.ascx.cs">
+      <DependentUpon>VdcImportServer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcImportServer.ascx.designer.cs">
+      <DependentUpon>VdcImportServer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcManagementNetwork.ascx.cs">
+      <DependentUpon>VdcManagementNetwork.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcManagementNetwork.ascx.designer.cs">
+      <DependentUpon>VdcManagementNetwork.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcPermissions.ascx.cs">
+      <DependentUpon>VdcPermissions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcPermissions.ascx.designer.cs">
+      <DependentUpon>VdcPermissions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VdcPrivateNetwork.ascx.cs">
+      <DependentUpon>VdcPrivateNetwork.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VdcPrivateNetwork.ascx.designer.cs">
+      <DependentUpon>VdcPrivateNetwork.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VirtualMachineImage.ashx.cs">
+      <DependentUpon>VirtualMachineImage.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VirtualMachineSnapshotImage.ashx.cs">
+      <DependentUpon>VirtualMachineSnapshotImage.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsAddExternalAddress.ascx.cs">
+      <DependentUpon>VpsDetailsAddExternalAddress.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsAddExternalAddress.ascx.designer.cs">
+      <DependentUpon>VpsDetailsAddExternalAddress.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsAddPrivateAddress.ascx.cs">
+      <DependentUpon>VpsDetailsAddPrivateAddress.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsAddPrivateAddress.ascx.designer.cs">
+      <DependentUpon>VpsDetailsAddPrivateAddress.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsAuditLog.ascx.cs">
+      <DependentUpon>VpsDetailsAuditLog.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsAuditLog.ascx.designer.cs">
+      <DependentUpon>VpsDetailsAuditLog.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsConfiguration.ascx.cs">
+      <DependentUpon>VpsDetailsConfiguration.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsConfiguration.ascx.designer.cs">
+      <DependentUpon>VpsDetailsConfiguration.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsDvd.ascx.cs">
+      <DependentUpon>VpsDetailsDvd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsDvd.ascx.designer.cs">
+      <DependentUpon>VpsDetailsDvd.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsEditConfiguration.ascx.cs">
+      <DependentUpon>VpsDetailsEditConfiguration.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsEditConfiguration.ascx.designer.cs">
+      <DependentUpon>VpsDetailsEditConfiguration.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsGeneral.ascx.cs">
+      <DependentUpon>VpsDetailsGeneral.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsGeneral.ascx.designer.cs">
+      <DependentUpon>VpsDetailsGeneral.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsHelp.ascx.cs">
+      <DependentUpon>VpsDetailsHelp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsHelp.ascx.designer.cs">
+      <DependentUpon>VpsDetailsHelp.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsInsertDvd.ascx.cs">
+      <DependentUpon>VpsDetailsInsertDvd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsInsertDvd.ascx.designer.cs">
+      <DependentUpon>VpsDetailsInsertDvd.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsNetwork.ascx.cs">
+      <DependentUpon>VpsDetailsNetwork.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsNetwork.ascx.designer.cs">
+      <DependentUpon>VpsDetailsNetwork.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsPermissions.ascx.cs">
+      <DependentUpon>VpsDetailsPermissions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsPermissions.ascx.designer.cs">
+      <DependentUpon>VpsDetailsPermissions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsReplications.ascx.cs">
+      <DependentUpon>VpsDetailsReplications.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsReplications.ascx.designer.cs">
+      <DependentUpon>VpsDetailsReplications.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsSnapshots.ascx.cs">
+      <DependentUpon>VpsDetailsSnapshots.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsSnapshots.ascx.designer.cs">
+      <DependentUpon>VpsDetailsSnapshots.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsTools.ascx.cs">
+      <DependentUpon>VpsDetailsTools.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsDetailsTools.ascx.designer.cs">
+      <DependentUpon>VpsDetailsTools.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsMoveServer.ascx.cs">
+      <DependentUpon>VpsMoveServer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsMoveServer.ascx.designer.cs">
+      <DependentUpon>VpsMoveServer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsToolsDeleteServer.ascx.cs">
+      <DependentUpon>VpsToolsDeleteServer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsToolsDeleteServer.ascx.designer.cs">
+      <DependentUpon>VpsToolsDeleteServer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxmox\VpsToolsReinstallServer.ascx.cs">
+      <DependentUpon>VpsToolsReinstallServer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proxmox\VpsToolsReinstallServer.ascx.designer.cs">
+      <DependentUpon>VpsToolsReinstallServer.ascx</DependentUpon>
     </Compile>
     <Compile Include="SettingsLetsEncryptRenewalNotificationLetter.ascx.cs">
       <DependentUpon>SettingsLetsEncryptRenewalNotificationLetter.ascx</DependentUpon>
@@ -610,6 +862,7 @@
       <DependentUpon>TinyMCEControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="VPS2012\guacamole\Encryption.cs" />
     <Compile Include="VpsMenu.ascx.cs">
       <DependentUpon>VpsMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5191,7 +5444,43 @@
   <ItemGroup>
     <Content Include="ApplyEnableHardQuotaFeature.ascx" />
     <Content Include="AutoUpdateServers.ascx" />
+    <Content Include="ProviderControls\Proxmox_Settings.ascx" />
     <Content Include="ProviderControls\SpamExperts_Settings.ascx" />
+    <Content Include="Proxmox\RemoteControl\Connect.aspx" />
+    <Content Include="Proxmox\RemoteControl\msrdp.cab" />
+    <Content Include="Proxmox\TestVirtualMachineTemplate.aspx" />
+    <Content Include="Proxmox\UserControls\Breadcrumb.ascx" />
+    <Content Include="Proxmox\UserControls\DynamicMemoryControl.ascx" />
+    <Content Include="Proxmox\UserControls\FormTitle.ascx" />
+    <Content Include="Proxmox\UserControls\Generation.ascx" />
+    <Content Include="Proxmox\UserControls\Menu.ascx" />
+    <Content Include="Proxmox\UserControls\ServerTabs.ascx" />
+    <Content Include="Proxmox\VdcAddExternalAddress.ascx" />
+    <Content Include="Proxmox\VdcAuditLog.ascx" />
+    <Content Include="Proxmox\VdcCreateServer.ascx" />
+    <Content Include="Proxmox\VdcExternalNetwork.ascx" />
+    <Content Include="Proxmox\VdcHome.ascx" />
+    <Content Include="Proxmox\VdcImportServer.ascx" />
+    <Content Include="Proxmox\VdcManagementNetwork.ascx" />
+    <Content Include="Proxmox\VdcPermissions.ascx" />
+    <Content Include="Proxmox\VdcPrivateNetwork.ascx" />
+    <Content Include="Proxmox\VpsDetailsAddExternalAddress.ascx" />
+    <Content Include="Proxmox\VpsDetailsAddPrivateAddress.ascx" />
+    <Content Include="Proxmox\VpsDetailsAuditLog.ascx" />
+    <Content Include="Proxmox\VpsDetailsConfiguration.ascx" />
+    <Content Include="Proxmox\VpsDetailsDvd.ascx" />
+    <Content Include="Proxmox\VpsDetailsEditConfiguration.ascx" />
+    <Content Include="Proxmox\VpsDetailsGeneral.ascx" />
+    <Content Include="Proxmox\VpsDetailsHelp.ascx" />
+    <Content Include="Proxmox\VpsDetailsInsertDvd.ascx" />
+    <Content Include="Proxmox\VpsDetailsNetwork.ascx" />
+    <Content Include="Proxmox\VpsDetailsPermissions.ascx" />
+    <Content Include="Proxmox\VpsDetailsReplications.ascx" />
+    <Content Include="Proxmox\VpsDetailsSnapshots.ascx" />
+    <Content Include="Proxmox\VpsDetailsTools.ascx" />
+    <Content Include="Proxmox\VpsMoveServer.ascx" />
+    <Content Include="Proxmox\VpsToolsDeleteServer.ascx" />
+    <Content Include="Proxmox\VpsToolsReinstallServer.ascx" />
     <Content Include="SettingsLetsEncryptRenewalNotificationLetter.ascx" />
     <Content Include="SettingsLetsEncryptRenewalAdminNotificationLetter.ascx" />
     <Content Include="ProviderControls\HyperVvmm_Settings.ascx" />
@@ -5296,6 +5585,8 @@
     <Content Include="VPSForPC\RemoteDesktop\App_LocalResources\Connect.aspx.de-DE.resx" />
     <Content Include="VPSForPC\UserControls\App_LocalResources\Menu.ascx.de-DE.resx" />
     <Content Include="VPSForPC\UserControls\App_LocalResources\ServerTabs.ascx.de-DE.resx" />
+    <Content Include="Proxmox\VirtualMachineImage.ashx" />
+    <Content Include="Proxmox\VirtualMachineSnapshotImage.ashx" />
     <None Include="Resources\PlusSign.ico" />
     <Content Include="SettingsMariaDBPolicy.ascx" />
     <Content Include="SettingsSfBUserPlansPolicy.ascx" />
@@ -5995,6 +6286,39 @@
     <Content Include="App_LocalResources\VirtualDirectoryHomeFolderControl.ascx.resx">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ProviderControls\App_LocalResources\Proxmox_Settings.ascx.resx" />
+    <Content Include="Proxmox\RemoteControl\App_LocalResources\Connect.aspx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcAddExternalAddress.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcAuditLog.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcCreateServer.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcExternalNetwork.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcHome.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcImportServer.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcManagementNetwork.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcPermissions.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VdcPrivateNetwork.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsAddExternalAddress.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsAddPrivateAddress.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsAuditLog.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsConfiguration.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsDvd.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsEditConfiguration.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsGeneral.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsHelp.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsInsertDvd.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsNetwork.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsPermissions.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsReplications.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsSnapshots.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsDetailsTools.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsMoveServer.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsToolsDeleteServer.ascx.resx" />
+    <Content Include="Proxmox\App_LocalResources\VpsToolsReinstallServer.ascx.resx" />
+    <Content Include="Proxmox\UserControls\App_LocalResources\Breadcrumb.ascx.resx" />
+    <Content Include="Proxmox\UserControls\App_LocalResources\DynamicMemoryControl.ascx.resx" />
+    <Content Include="Proxmox\UserControls\App_LocalResources\Generation.ascx.resx" />
+    <Content Include="Proxmox\UserControls\App_LocalResources\Menu.ascx.resx" />
+    <Content Include="Proxmox\UserControls\App_LocalResources\ServerTabs.ascx.resx" />
     <EmbeddedResource Include="RDS\App_LocalResources\RDSEditCollectionSettings.ascx.resx" />
     <Content Include="RDSServersEditServer.ascx" />
     <Content Include="RDS\AssignedRDSServers.ascx" />

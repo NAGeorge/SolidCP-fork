@@ -59,6 +59,7 @@ namespace SolidCP.EnterpriseServer
         public const string HostedCRM2013 = "Hosted CRM2013"; // CRM 2013/2015
         public const string VPS = "VPS";
         public const string VPS2012 = "VPS2012";
+        public const string Proxmox = "Proxmox";
         public const string BlackBerry = "BlackBerry";
         public const string OCS = "OCS";
         public const string VPSForPC = "VPSForPC";

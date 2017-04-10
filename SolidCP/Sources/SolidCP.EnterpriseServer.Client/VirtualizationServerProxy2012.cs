@@ -73,7 +73,11 @@ namespace SolidCP.EnterpriseServer {
         private System.Threading.SendOrPostCallback ImportVirtualMachineOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetVirtualMachineThumbnailOperationCompleted;
-        
+
+        private System.Threading.SendOrPostCallback GetAvailableVLANsOperationCompleted;
+
+        private System.Threading.SendOrPostCallback GetExternalNetworkVLANOperationCompleted;
+
         private System.Threading.SendOrPostCallback GetVirtualMachineGeneralDetailsOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetVirtualMachineExtendedInfoOperationCompleted;
@@ -89,7 +93,9 @@ namespace SolidCP.EnterpriseServer {
         private System.Threading.SendOrPostCallback ChangeAdministratorPasswordOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateVirtualMachineConfigurationOperationCompleted;
-        
+
+        private System.Threading.SendOrPostCallback GetVirtualMachineGuacamoleURLOperationCompleted;
+
         private System.Threading.SendOrPostCallback GetInsertedDvdDiskOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetLibraryDisksOperationCompleted;
@@ -240,7 +246,10 @@ namespace SolidCP.EnterpriseServer {
         
         /// <remarks/>
         public event UpdateVirtualMachineHostNameCompletedEventHandler UpdateVirtualMachineHostNameCompleted;
-        
+
+        /// <remarks/>
+        public event GetVirtualMachineGuacamoleURLCompletedEventHandler GetVirtualMachineGuacamoleURLCompleted;
+
         /// <remarks/>
         public event ChangeVirtualMachineStateCompletedEventHandler ChangeVirtualMachineStateCompleted;
         
@@ -288,7 +297,13 @@ namespace SolidCP.EnterpriseServer {
         
         /// <remarks/>
         public event GetSnapshotThumbnailCompletedEventHandler GetSnapshotThumbnailCompleted;
-        
+
+        /// <remarks/>
+        public event GetAvailableVLANsCompletedEventHandler GetAvailableVLANsCompleted;
+
+        /// <remarks/>
+        public event GetExternalNetworkVLANCompletedEventHandler GetExternalNetworkVLANCompleted;
+
         /// <remarks/>
         public event GetExternalNetworkAdapterDetailsCompletedEventHandler GetExternalNetworkAdapterDetailsCompleted;
         
@@ -1967,7 +1982,58 @@ namespace SolidCP.EnterpriseServer {
                 this.UpdateVirtualMachineConfigurationCompleted(this, new UpdateVirtualMachineConfigurationCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
+
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/GetVirtualMachineGuacamoleURL", RequestNamespace = "http://smbsaas/solidcp/enterpriseserver", ResponseNamespace = "http://smbsaas/solidcp/enterpriseserver", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string GetVirtualMachineGuacamoleURL(int itemId)
+        {
+            object[] results = this.Invoke("GetVirtualMachineGuacamoleURL", new object[] {
+                        itemId});
+            return ((string)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetVirtualMachineGuacamoleURL(int itemId, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetVirtualMachineGuacamoleURL", new object[] {
+                        itemId}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public LibraryItem EndGetVirtualMachineGuacamoleURL(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((LibraryItem)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetVirtualMachineGuacamoleURLAsync(int itemId)
+        {
+            this.GetVirtualMachineGuacamoleURLAsync(itemId, null);
+        }
+
+        /// <remarks/>
+        public void GetVirtualMachineGuacamoleURLAsync(int itemId, object userState)
+        {
+            if ((this.GetVirtualMachineGuacamoleURLOperationCompleted == null))
+            {
+                this.GetVirtualMachineGuacamoleURLOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetVirtualMachineGuacamoleURLOperationCompleted);
+            }
+            this.InvokeAsync("GetVirtualMachineGuacamoleURL", new object[] {
+                        itemId}, this.GetVirtualMachineGuacamoleURLOperationCompleted, userState);
+        }
+
+        private void OnGetVirtualMachineGuacamoleURLOperationCompleted(object arg)
+        {
+            if ((this.GetVirtualMachineGuacamoleURLCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetVirtualMachineGuacamoleURLCompleted(this, new GetVirtualMachineGuacamoleURLCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/GetInsertedDvdDisk", RequestNamespace="http://smbsaas/solidcp/enterpriseserver", ResponseNamespace="http://smbsaas/solidcp/enterpriseserver", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public LibraryItem GetInsertedDvdDisk(int itemId) {
@@ -2487,7 +2553,111 @@ namespace SolidCP.EnterpriseServer {
                 this.GetSnapshotThumbnailCompleted(this, new GetSnapshotThumbnailCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
+
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/GetAvailableVLANs", RequestNamespace = "http://smbsaas/solidcp/enterpriseserver", ResponseNamespace = "http://smbsaas/solidcp/enterpriseserver", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public AvailableVLANList GetAvailableVLANs(int itemId)
+        {
+            object[] results = this.Invoke("GetAvailableVLANs", new object[] {
+                        itemId});
+            return ((AvailableVLANList)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetAvailableVLANs(int itemId, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetAvailableVLANs", new object[] {
+                        itemId}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public LibraryItem EndGetAvailableVLANs(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((LibraryItem)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetAvailableVLANsAsync(int itemId)
+        {
+            this.GetAvailableVLANsAsync(itemId, null);
+        }
+
+        /// <remarks/>
+        public void GetAvailableVLANsAsync(int itemId, object userState)
+        {
+            if ((this.GetAvailableVLANsOperationCompleted == null))
+            {
+                this.GetAvailableVLANsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAvailableVLANsOperationCompleted);
+            }
+            this.InvokeAsync("GetAvailableVLANs", new object[] {
+                        itemId}, this.GetAvailableVLANsOperationCompleted, userState);
+        }
+
+        private void OnGetAvailableVLANsOperationCompleted(object arg)
+        {
+            if ((this.GetAvailableVLANsCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAvailableVLANsCompleted(this, new GetAvailableVLANsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/GetExternalNetworkVLAN", RequestNamespace = "http://smbsaas/solidcp/enterpriseserver", ResponseNamespace = "http://smbsaas/solidcp/enterpriseserver", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int GetExternalNetworkVLAN(int itemId)
+        {
+            object[] results = this.Invoke("GetExternalNetworkVLAN", new object[] {
+                        itemId});
+            return ((int)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetExternalNetworkVLAN(int itemId, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetExternalNetworkVLAN", new object[] {
+                        itemId}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public LibraryItem EndGetExternalNetworkVLAN(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((LibraryItem)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetExternalNetworkVLANAsync(int itemId)
+        {
+            this.GetExternalNetworkVLANAsync(itemId, null);
+        }
+
+        /// <remarks/>
+        public void GetExternalNetworkVLANAsync(int itemId, object userState)
+        {
+            if ((this.GetExternalNetworkVLANOperationCompleted == null))
+            {
+                this.GetExternalNetworkVLANOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetExternalNetworkVLANOperationCompleted);
+            }
+            this.InvokeAsync("GetExternalNetworkVLAN", new object[] {
+                        itemId}, this.GetExternalNetworkVLANOperationCompleted, userState);
+        }
+
+        private void OnGetExternalNetworkVLANOperationCompleted(object arg)
+        {
+            if ((this.GetExternalNetworkVLANCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetExternalNetworkVLANCompleted(this, new GetExternalNetworkVLANCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+
+
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/GetExternalNetworkAdapterDetails", RequestNamespace="http://smbsaas/solidcp/enterpriseserver", ResponseNamespace="http://smbsaas/solidcp/enterpriseserver", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public NetworkAdapterDetails GetExternalNetworkAdapterDetails(int itemId) {
@@ -3714,7 +3884,38 @@ namespace SolidCP.EnterpriseServer {
             }
         }
     }
-    
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
+    public delegate void GetAvailableVLANsCompletedEventHandler(object sender, GetAvailableVLANsCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAvailableVLANsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetAvailableVLANsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+                base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public LibraryItem Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((LibraryItem)(this.results[0]));
+            }
+        }
+    }
+
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
     public delegate void GetExternalNetworkDetailsCompletedEventHandler(object sender, GetExternalNetworkDetailsCompletedEventArgs e);
@@ -4494,7 +4695,39 @@ namespace SolidCP.EnterpriseServer {
             }
         }
     }
-    
+
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
+    public delegate void GetVirtualMachineGuacamoleURLCompletedEventHandler(object sender, GetVirtualMachineGuacamoleURLCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetVirtualMachineGuacamoleURLCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetVirtualMachineGuacamoleURLCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+                base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public LibraryItem Result
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((LibraryItem)(this.results[0]));
+            }
+        }
+    }
+
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
     public delegate void CreateSnapshotCompletedEventHandler(object sender, CreateSnapshotCompletedEventArgs e);

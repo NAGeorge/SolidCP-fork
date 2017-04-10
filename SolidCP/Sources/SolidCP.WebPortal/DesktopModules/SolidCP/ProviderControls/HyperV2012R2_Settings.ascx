@@ -36,6 +36,83 @@
 </fieldset>
 <br />
 
+
+
+<fieldset>
+    <legend>
+        <asp:Localize ID="locGuacamole" runat="server" meta:resourcekey="locGuacamole" Text="Guacamole"></asp:Localize>
+    </legend>
+    <table cellpadding="2" cellspacing="0" style="margin: 10px;">
+
+
+
+	    <tr>
+		    <td class="SubHead" style="width:250px;">
+		        <asp:Localize ID="locGuacamoleConnectScript" runat="server" meta:resourcekey="locGuacamoleConnectScript" Text="Guacamole Connect Script URL:"></asp:Localize>
+		    </td>
+		    <td>
+                <asp:TextBox Width="250px" CssClass="NormalTextBox" Runat="server" ID="txtGuacamoleConnectScript"></asp:TextBox>
+            </td>
+	    </tr>
+
+
+	    <tr>
+		    <td class="SubHead" style="width:250px;">
+		        <asp:Localize ID="locGuacamoleConnectPassword" runat="server" meta:resourcekey="locGuacamoleConnectPassword" Text="Guacamole Encryption Password Base64 Encoded 256Bit Key:"></asp:Localize>
+		    </td>
+		    <td>
+                <asp:TextBox Width="250px" CssClass="NormalTextBox" Runat="server" ID="txtGuacamoleConnectPassword"></asp:TextBox>
+                <asp:Button ID="btnguacamolepassword" runat="server" meta:resourcekey="btnguacamolepassword" CssClass="Button1" Text="Generate Random Password" CausesValidation="false" 
+                    onclick="btnguacamolepassword_Click" />
+            </td>
+	    </tr>
+
+       <tr>
+		    <td class="SubHead" style="width:250px;">
+		        <asp:Localize ID="locGuacamoleHyperVIP" runat="server" meta:resourcekey="locGuacamoleHyperVIP" Text="Hyper-V IP:"></asp:Localize>
+		    </td>
+		    <td>
+                <asp:TextBox Width="250px" CssClass="NormalTextBox" Runat="server" ID="txtGuacamoleHyperVIP"></asp:TextBox>
+                
+            </td>
+	    </tr>
+
+        <tr>
+		    <td class="SubHead" style="width:250px;">
+		        <asp:Localize ID="locGuacamoleHyperVDomain" runat="server" meta:resourcekey="locGuacamoleHyperVDomain" Text="Hyper-V Domain:"></asp:Localize>
+		    </td>
+		    <td>
+                <asp:TextBox Width="250px" CssClass="NormalTextBox" Runat="server" ID="txtGuacamoleHyperVDomain"></asp:TextBox>
+                
+            </td>
+	    </tr>
+
+        <tr id="rowPassword" runat="server">
+    		<td class="SubHead">
+		        <asp:Label ID="lblCurrPassword" runat="server" meta:resourcekey="lblCurrPassword" Text="Current Hyper-V Administrator Password:"></asp:Label>
+    		</td>
+    		<td class="Normal">*******
+		    </td>
+	    </tr>
+
+        <tr>
+		    <td class="SubHead" style="width:250px;">
+		        <asp:Localize ID="locGuacamoleHyperVAdministratorPassword" runat="server" meta:resourcekey="locGuacamoleHyperVAdministratorPassword" Text="Hyper-V Administrator Password:"></asp:Localize>
+		    </td>
+		    <td>
+                <asp:TextBox Width="250px" CssClass="NormalTextBox" Runat="server" ID="txtGuacamoleHyperVAdministratorPassword"  TextMode="Password"></asp:TextBox>
+                
+            </td>
+	    </tr>
+
+
+
+
+	</table>
+</fieldset>
+<br />
+
+
 <fieldset>
     <legend>
         <asp:Localize ID="locGeneralSettings" runat="server" meta:resourcekey="locGeneralSettings" Text="General Settings"></asp:Localize>

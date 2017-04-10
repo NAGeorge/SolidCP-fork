@@ -96,6 +96,25 @@ namespace SolidCP.Portal
         {
             if (Page.IsValid)
             {
+                bool vps = ddlPools.SelectedIndex > 1;
+                int vlantag = 0;
+                try
+                {
+                    vlantag = Convert.ToInt32(VLAN.Text);
+                }
+                catch
+                {
+                    vlantag = 0;
+                }
+                if (vps)
+                {
+                    if (vlantag > 4096 || vlantag < 0)
+                    {
+                        ShowErrorMessage("Error updating IP address - Invalid VLAN TAG", "VLANTAG");
+                        return;
+                    }
+
+                }
                 int serverId = Utils.ParseInt(ddlServer.SelectedValue, 0);
                 IPAddressPool pool = (IPAddressPool)Enum.Parse(typeof(IPAddressPool), ddlPools.SelectedValue, true);
                 string comments = txtComments.Text.Trim();
@@ -107,7 +126,7 @@ namespace SolidCP.Portal
                     {
                         // add IP range
                         ResultObject res = ES.Services.Servers.AddIPAddressesRange(pool, serverId, startIP.Text, endIP.Text,
-                            internalIP.Text, subnetMask.Text, defaultGateway.Text, comments);
+                            internalIP.Text, subnetMask.Text, defaultGateway.Text, comments, vlantag);
                         if (!res.IsSuccess)
                         {
                             // show error
@@ -127,7 +146,7 @@ namespace SolidCP.Portal
                     try
                     {
                         IntResult res = ES.Services.Servers.AddIPAddress(pool, serverId, startIP.Text,
-                            internalIP.Text, subnetMask.Text, defaultGateway.Text, comments);
+                            internalIP.Text, subnetMask.Text, defaultGateway.Text, comments, vlantag);
                         if (!res.IsSuccess)
                         {
                             messageBox.ShowMessage(res, "IP_ADD_IP", "IP");
@@ -145,6 +164,7 @@ namespace SolidCP.Portal
                 RedirectBack();
             }
         }
+
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             // Redirect back to the portal home page

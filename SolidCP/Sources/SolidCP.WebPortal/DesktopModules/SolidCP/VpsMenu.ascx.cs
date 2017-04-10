@@ -41,10 +41,13 @@ namespace SolidCP.Portal
     public partial class VpsMenu : SolidCPModuleBase
     {
         private const string PID_SPACE_VPS = "SpaceVPS2012";
+        private const string PID_SPACE_PROXMOX = "SpaceProxmox";
         protected void Page_Load(object sender, EventArgs e)
         {
             // organization
-            bool vpsVisible = Request[DefaultPage.PAGE_ID_PARAM].Equals(PID_SPACE_VPS, StringComparison.InvariantCultureIgnoreCase);
+            bool vpsVisible = (Request[DefaultPage.PAGE_ID_PARAM].Equals(PID_SPACE_VPS, StringComparison.InvariantCultureIgnoreCase) ||
+                                Request[DefaultPage.PAGE_ID_PARAM].Equals(PID_SPACE_PROXMOX, StringComparison.InvariantCultureIgnoreCase));
+
             vpsMenu.Visible = vpsVisible;
             if (vpsVisible)
             {
@@ -78,7 +81,7 @@ namespace SolidCP.Portal
             if (PackageId <= 0)
                 return;
             // VPS Menu
-            if (Cntx.Groups.ContainsKey(ResourceGroups.VPS2012))
+            if (Cntx.Groups.ContainsKey(ResourceGroups.VPS2012) || Cntx.Groups.ContainsKey(ResourceGroups.Proxmox))
                 PrepareVPS2012Menu(items);
         }
         private void PrepareVPS2012Menu(MenuItemCollection vpsItems)
@@ -86,14 +89,18 @@ namespace SolidCP.Portal
             bool isAdmin = (PanelSecurity.EffectiveUser.Role == UserRole.Administrator);
             // add items
             vpsItems.Add(CreateMenuItem("VPSHome", ""));
-            if (cntx.Quotas.ContainsKey(Quotas.VPS2012_EXTERNAL_NETWORK_ENABLED)
-                && !cntx.Quotas[Quotas.VPS2012_EXTERNAL_NETWORK_ENABLED].QuotaExhausted
+            if (((cntx.Quotas.ContainsKey(Quotas.VPS2012_EXTERNAL_NETWORK_ENABLED)
+                && !cntx.Quotas[Quotas.VPS2012_EXTERNAL_NETWORK_ENABLED].QuotaExhausted)
+                || (cntx.Quotas.ContainsKey(Quotas.PROXMOX_EXTERNAL_NETWORK_ENABLED)
+                && !cntx.Quotas[Quotas.PROXMOX_EXTERNAL_NETWORK_ENABLED].QuotaExhausted))
                 || (PanelSecurity.PackageId == 1 && isAdmin))
                 vpsItems.Add(CreateMenuItem("ExternalNetwork", "vdc_external_network"));
             if (isAdmin)
                 vpsItems.Add(CreateMenuItem("ManagementNetwork", "vdc_management_network"));
-            if (cntx.Quotas.ContainsKey(Quotas.VPS2012_PRIVATE_NETWORK_ENABLED)
+            if ((cntx.Quotas.ContainsKey(Quotas.VPS2012_PRIVATE_NETWORK_ENABLED)
                 && !cntx.Quotas[Quotas.VPS2012_PRIVATE_NETWORK_ENABLED].QuotaExhausted)
+                || (cntx.Quotas.ContainsKey(Quotas.PROXMOX_PRIVATE_NETWORK_ENABLED)
+                && !cntx.Quotas[Quotas.PROXMOX_PRIVATE_NETWORK_ENABLED].QuotaExhausted))
                 vpsItems.Add(CreateMenuItem("PrivateNetwork", "vdc_private_network"));
             vpsItems.Add(CreateMenuItem("AuditLog", "vdc_audit_log"));
         }

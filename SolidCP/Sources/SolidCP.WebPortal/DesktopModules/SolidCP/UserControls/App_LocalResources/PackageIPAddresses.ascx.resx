@@ -171,4 +171,7 @@
   <data name="btnAllocateAddressText.Text" xml:space="preserve">
     <value>Allocate...</value>
   </data>
+  <data name="gvAddressesVLAN.HeaderText" xml:space="preserve">
+    <value>VLAN</value>
+  </data>
 </root>

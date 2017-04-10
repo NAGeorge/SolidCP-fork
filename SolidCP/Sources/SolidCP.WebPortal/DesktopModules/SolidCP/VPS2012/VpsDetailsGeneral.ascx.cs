@@ -75,15 +75,20 @@ namespace SolidCP.Portal.VPS2012
 
             if (vm != null)
             {
-                bool displayRDP = (Request.Browser.Browser == "IE"
+                // Guacamole & RDP
+                string guacamoleconnecturl = ES.Services.VPS2012.GetVirtualMachineGuacamoleURL(PanelRequest.ItemID);
+
+                bool displayRDP = ((guacamoleconnecturl != ""
+                    || Request.Browser.Browser == "IE"
                     && Request.Browser.ActiveXControls
-                    && Request.Browser.VBScript
+                    && Request.Browser.VBScript)
                     && vm.State != VirtualMachineState.Off
                     && vm.State != VirtualMachineState.Paused
                     && vm.State != VirtualMachineState.Saved
                     && item.RemoteDesktopEnabled);
                 lnkHostname.Text = item.Hostname.ToUpper();
                 lnkHostname.Visible = displayRDP;
+                lnkRDP.Enabled = displayRDP;
 
                 litHostname.Text = item.Hostname.ToUpper();
                 litHostname.Visible = !displayRDP;
@@ -97,8 +102,14 @@ namespace SolidCP.Portal.VPS2012
                     txtDomain.Text = item.Domain;
                 }
 
-                litRdpPageUrl.Text = Page.ResolveUrl("~/DesktopModules/SolidCP/VPS2012/RemoteDesktop/Connect.aspx?ItemID=" + PanelRequest.ItemID + "&Resolution=");
-
+                if (guacamoleconnecturl != "")
+                {
+                    litRdpPageUrl.Text = Page.ResolveUrl(guacamoleconnecturl);
+                }
+                else
+                {
+                    litRdpPageUrl.Text = Page.ResolveUrl("~/DesktopModules/SolidCP/VPS2012/RemoteDesktop/Connect.aspx?ItemID=" + PanelRequest.ItemID + "&Resolution=");
+                }
                 TimeSpan uptime = TimeSpan.FromMilliseconds(vm.Uptime);
                 uptime = uptime.Subtract(TimeSpan.FromMilliseconds(uptime.Milliseconds));
                 litUptime.Text = uptime.ToString();

@@ -5083,7 +5083,7 @@ namespace SolidCP.EnterpriseServer {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/AddIPAddress", RequestNamespace="http://smbsaas/solidcp/enterpriseserver", ResponseNamespace="http://smbsaas/solidcp/enterpriseserver", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public IntResult AddIPAddress(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments) {
+        public IntResult AddIPAddress(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN) {
             object[] results = this.Invoke("AddIPAddress", new object[] {
                         pool,
                         serverId,
@@ -5091,12 +5091,13 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments});
+                        comments,
+                        VLAN});
             return ((IntResult)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginAddIPAddress(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginAddIPAddress(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("AddIPAddress", new object[] {
                         pool,
                         serverId,
@@ -5104,7 +5105,8 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments}, callback, asyncState);
+                        comments,
+                        VLAN}, callback, asyncState);
         }
         
         /// <remarks/>
@@ -5114,12 +5116,12 @@ namespace SolidCP.EnterpriseServer {
         }
         
         /// <remarks/>
-        public void AddIPAddressAsync(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments) {
-            this.AddIPAddressAsync(pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, null);
+        public void AddIPAddressAsync(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN) {
+            this.AddIPAddressAsync(pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, VLAN, null);
         }
         
         /// <remarks/>
-        public void AddIPAddressAsync(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, object userState) {
+        public void AddIPAddressAsync(IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN, object userState) {
             if ((this.AddIPAddressOperationCompleted == null)) {
                 this.AddIPAddressOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddIPAddressOperationCompleted);
             }
@@ -5130,7 +5132,8 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments}, this.AddIPAddressOperationCompleted, userState);
+                        comments,
+                        VLAN}, this.AddIPAddressOperationCompleted, userState);
         }
         
         private void OnAddIPAddressOperationCompleted(object arg) {
@@ -5142,7 +5145,7 @@ namespace SolidCP.EnterpriseServer {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/AddIPAddressesRange", RequestNamespace="http://smbsaas/solidcp/enterpriseserver", ResponseNamespace="http://smbsaas/solidcp/enterpriseserver", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ResultObject AddIPAddressesRange(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments) {
+        public ResultObject AddIPAddressesRange(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN) {
             object[] results = this.Invoke("AddIPAddressesRange", new object[] {
                         pool,
                         serverId,
@@ -5151,12 +5154,13 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments});
+                        comments,
+                        VLAN});
             return ((ResultObject)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginAddIPAddressesRange(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginAddIPAddressesRange(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("AddIPAddressesRange", new object[] {
                         pool,
                         serverId,
@@ -5165,7 +5169,8 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments}, callback, asyncState);
+                        comments,
+                        VLAN}, callback, asyncState);
         }
         
         /// <remarks/>
@@ -5175,12 +5180,12 @@ namespace SolidCP.EnterpriseServer {
         }
         
         /// <remarks/>
-        public void AddIPAddressesRangeAsync(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments) {
-            this.AddIPAddressesRangeAsync(pool, serverId, externalIP, endIP, internalIP, subnetMask, defaultGateway, comments, null);
+        public void AddIPAddressesRangeAsync(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN) {
+            this.AddIPAddressesRangeAsync(pool, serverId, externalIP, endIP, internalIP, subnetMask, defaultGateway, comments, VLAN, null);
         }
         
         /// <remarks/>
-        public void AddIPAddressesRangeAsync(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, object userState) {
+        public void AddIPAddressesRangeAsync(IPAddressPool pool, int serverId, string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN, object userState) {
             if ((this.AddIPAddressesRangeOperationCompleted == null)) {
                 this.AddIPAddressesRangeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddIPAddressesRangeOperationCompleted);
             }
@@ -5192,7 +5197,8 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments}, this.AddIPAddressesRangeOperationCompleted, userState);
+                        comments,
+                        VLAN}, this.AddIPAddressesRangeOperationCompleted, userState);
         }
         
         private void OnAddIPAddressesRangeOperationCompleted(object arg) {
@@ -5204,7 +5210,7 @@ namespace SolidCP.EnterpriseServer {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/UpdateIPAddress", RequestNamespace="http://smbsaas/solidcp/enterpriseserver", ResponseNamespace="http://smbsaas/solidcp/enterpriseserver", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ResultObject UpdateIPAddress(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments) {
+        public ResultObject UpdateIPAddress(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN) {
             object[] results = this.Invoke("UpdateIPAddress", new object[] {
                         addressId,
                         pool,
@@ -5213,12 +5219,13 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments});
+                        comments,
+                        VLAN});
             return ((ResultObject)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginUpdateIPAddress(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginUpdateIPAddress(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("UpdateIPAddress", new object[] {
                         addressId,
                         pool,
@@ -5227,7 +5234,8 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments}, callback, asyncState);
+                        comments,
+                        VLAN}, callback, asyncState);
         }
         
         /// <remarks/>
@@ -5237,12 +5245,12 @@ namespace SolidCP.EnterpriseServer {
         }
         
         /// <remarks/>
-        public void UpdateIPAddressAsync(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments) {
-            this.UpdateIPAddressAsync(addressId, pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, null);
+        public void UpdateIPAddressAsync(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN) {
+            this.UpdateIPAddressAsync(addressId, pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, VLAN, null);
         }
         
         /// <remarks/>
-        public void UpdateIPAddressAsync(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, object userState) {
+        public void UpdateIPAddressAsync(int addressId, IPAddressPool pool, int serverId, string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN, object userState) {
             if ((this.UpdateIPAddressOperationCompleted == null)) {
                 this.UpdateIPAddressOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateIPAddressOperationCompleted);
             }
@@ -5254,7 +5262,8 @@ namespace SolidCP.EnterpriseServer {
                         internalIP,
                         subnetMask,
                         defaultGateway,
-                        comments}, this.UpdateIPAddressOperationCompleted, userState);
+                        comments,
+                        VLAN}, this.UpdateIPAddressOperationCompleted, userState);
         }
         
         private void OnUpdateIPAddressOperationCompleted(object arg) {
@@ -5266,19 +5275,20 @@ namespace SolidCP.EnterpriseServer {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/enterpriseserver/UpdateIPAddresses", RequestNamespace="http://smbsaas/solidcp/enterpriseserver", ResponseNamespace="http://smbsaas/solidcp/enterpriseserver", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ResultObject UpdateIPAddresses(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments) {
+        public ResultObject UpdateIPAddresses(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments, int VLAN) {
             object[] results = this.Invoke("UpdateIPAddresses", new object[] {
                         addresses,
                         pool,
                         serverId,
                         subnetMask,
                         defaultGateway,
-                        comments});
+                        comments,
+                        VLAN});
             return ((ResultObject)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginUpdateIPAddresses(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginUpdateIPAddresses(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments, int VLAN, System.AsyncCallback callback, object asyncState) {
             return this.BeginInvoke("UpdateIPAddresses", new object[] {
                         addresses,
                         pool,
@@ -5295,12 +5305,12 @@ namespace SolidCP.EnterpriseServer {
         }
         
         /// <remarks/>
-        public void UpdateIPAddressesAsync(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments) {
-            this.UpdateIPAddressesAsync(addresses, pool, serverId, subnetMask, defaultGateway, comments, null);
+        public void UpdateIPAddressesAsync(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments, int VLAN) {
+            this.UpdateIPAddressesAsync(addresses, pool, serverId, subnetMask, defaultGateway, comments, VLAN, null);
         }
         
         /// <remarks/>
-        public void UpdateIPAddressesAsync(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments, object userState) {
+        public void UpdateIPAddressesAsync(int[] addresses, IPAddressPool pool, int serverId, string subnetMask, string defaultGateway, string comments, int VLAN, object userState) {
             if ((this.UpdateIPAddressesOperationCompleted == null)) {
                 this.UpdateIPAddressesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateIPAddressesOperationCompleted);
             }
@@ -5310,7 +5320,8 @@ namespace SolidCP.EnterpriseServer {
                         serverId,
                         subnetMask,
                         defaultGateway,
-                        comments}, this.UpdateIPAddressesOperationCompleted, userState);
+                        comments,
+                        VLAN}, this.UpdateIPAddressesOperationCompleted, userState);
         }
         
         private void OnUpdateIPAddressesOperationCompleted(object arg) {

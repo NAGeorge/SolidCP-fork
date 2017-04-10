@@ -61,6 +61,9 @@
         <asp:BoundField HeaderText="gvAddressesDefaultGateway" meta:resourcekey="gvAddressesDefaultGateway"
             DataField="DefaultGateway" SortExpression="DefaultGateway" />
 
+        <asp:BoundField HeaderText="gvAddressesVLAN" meta:resourcekey="gvAddressesVLAN"
+            DataField="VLAN" SortExpression="VLAN" />
+
         <asp:TemplateField HeaderText="gvAddressesItemName" meta:resourcekey="gvAddressesItemName" SortExpression="ItemName">						        						        
 	        <ItemTemplate>
 		         <asp:hyperlink id="lnkEdit" runat="server" NavigateUrl='<%# GetItemEditUrl(Eval("ItemID").ToString()) %>'>

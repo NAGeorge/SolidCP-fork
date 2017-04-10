@@ -30,7 +30,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE)  ARISING  IN  ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-﻿using System;
+using System;
 using System.Data;
 using System.Xml;
 using SolidCP.Providers.Common;
@@ -48,6 +48,7 @@ using System.Diagnostics;
 ﻿using System.Net;
 ﻿using SolidCP.EnterpriseServer.Code.Virtualization2012;
 ﻿using SolidCP.Providers.Virtualization2012;
+using SolidCP.EnterpriseServer.Code.Virtualization2012.Helpers;
 
 namespace SolidCP.EnterpriseServer
 {
@@ -64,6 +65,7 @@ namespace SolidCP.EnterpriseServer
         private const int DEFAULT_HDD_SIZE = 20; // gigabytes
         private const int DEFAULT_PRIVATE_IPS_NUMBER = 1;
         private const int DEFAULT_SNAPSHOTS_NUMBER = 5;
+        private const int DEFAULT_VLAN = 0;
 
         #region Virtual Machines
         public static VirtualMachineMetaItemsPaged GetVirtualMachines(int packageId,
@@ -484,6 +486,7 @@ namespace SolidCP.EnterpriseServer
                 vm.RebootAllowed = rebootAllowed;
                 vm.ResetAllowed = resetAllowed;
                 vm.ReinstallAllowed = reinstallAllowed;
+                vm.defaultaccessvlan = otherSettings.defaultaccessvlan;
 
                 // dynamic memory
                 if (otherSettings.DynamicMemory != null && otherSettings.DynamicMemory.Enabled)
@@ -635,8 +638,8 @@ namespace SolidCP.EnterpriseServer
                     if (vm.ExternalNetworkEnabled)
                     {
                         // provision IP addresses
-                        ResultObject privResult = AddVirtualMachineExternalIPAddresses(vm.Id, randomExternalAddresses,
-                            externalAddressesNumber, externalAddresses, false);
+                        ResultObject privResult = AddVirtualMachineInternalIPAddresses(vm.Id, randomExternalAddresses,
+                            externalAddressesNumber, externalAddresses, false, vm.defaultaccessvlan);
 
                         // set primary IP address
                         NetworkAdapterDetails extNic = GetExternalNetworkAdapterDetails(vm.Id);
@@ -1593,6 +1596,7 @@ namespace SolidCP.EnterpriseServer
             vm.Name = machine.Name;
             vm.RamSize = machine.RamSize;
             vm.ServiceId = machine.ServiceId;
+            vm.ExternalNicMacAddress = machine.ExternalNicMacAddress;
 
             return vm;
         }
@@ -2157,6 +2161,16 @@ namespace SolidCP.EnterpriseServer
         }
         #endregion
 
+        #region VNC
+        public static string GetVirtualMachineGuacamoleURL(int itemId)
+        {
+            VirtualMachine vm = GetVirtualMachineByItemId(itemId);
+            string vncurl = GuacaHelper.GetUrl(vm);
+
+            return vncurl;
+        }
+        #endregion
+
         #region DVD
         public static LibraryItem GetInsertedDvdDisk(int itemId)
         {
@@ -2640,6 +2654,66 @@ namespace SolidCP.EnterpriseServer
         #endregion
 
         #region Network - External
+        public static AvailableVLANList GetAvailableVLANs(int PackageId)
+        {
+            throw new NotImplementedException();
+            /*
+            AvailableVLANList vlanlist = new AvailableVLANList();
+            List<int> vlans = new List<int>();
+            try
+            {
+
+                List<PackageIPAddress> packageips = ServerController.GetPackageUnassignedIPAddresses(PackageId, IPAddressPool.VpsExternalNetwork);
+                foreach (PackageIPAddress ip in packageips)
+                {
+                    vlans.Add(ip.VLAN);
+                }
+
+                // return vlan list without dupes
+                vlanlist.vlans = vlans.Distinct().ToList();
+            }
+            catch (Exception ex)
+            {
+                TaskManager.WriteError(ex, "VPS_GET_VLAN_ERROR");
+            }
+            return vlanlist;
+            */
+        }
+
+        public static int GetExternalNetworkVLAN(int itemId)
+        {
+            int adaptervlan = DEFAULT_VLAN;
+            VirtualMachine vm = null;
+            try
+            {
+                VirtualMachine vmgeneral = GetVirtualMachineGeneralDetails(itemId);
+                vm = GetVirtualMachineExtendedInfo(vmgeneral.ServiceId, vmgeneral.VirtualMachineId);
+                vm.ExternalNicMacAddress = vmgeneral.ExternalNicMacAddress;
+            }
+            catch (Exception ex)
+            {
+                TaskManager.WriteError(ex, "VPS_GET_VM_DETAILS");
+            }
+            if (vm != null)
+            {
+                bool firstadapter = true;
+                foreach (VirtualMachineNetworkAdapter adapter in vm.Adapters)
+                {
+                    if (firstadapter)
+                    {
+                        firstadapter = false;
+                        adaptervlan = adapter.vlan;
+                    }
+                    // Overwrite First Adapter by Mac Match
+                    if (adapter.MacAddress == vm.ExternalNicMacAddress)
+                    {
+                        adaptervlan = adapter.vlan;
+                    }
+                }
+            }
+            return adaptervlan;
+        }
+
         public static NetworkAdapterDetails GetExternalNetworkDetails(int packageId)
         {
             // load service
@@ -2752,6 +2826,11 @@ namespace SolidCP.EnterpriseServer
 
         public static ResultObject AddVirtualMachineExternalIPAddresses(int itemId, bool selectRandom, int addressesNumber, int[] addressIds, bool provisionKvp)
         {
+            return AddVirtualMachineInternalIPAddresses(itemId, selectRandom, addressesNumber, addressIds, provisionKvp, -1);
+        }
+
+        public static ResultObject AddVirtualMachineInternalIPAddresses(int itemId, bool selectRandom, int addressesNumber, int[] addressIds, bool provisionKvp, int vlan)
+        {
             if (addressIds == null)
                 throw new ArgumentNullException("addressIds");
 
@@ -2778,11 +2857,23 @@ namespace SolidCP.EnterpriseServer
             // start task
             res = TaskManager.StartResultTask<ResultObject>("VPS", "ADD_EXTERNAL_IP", vm.Id, vm.Name, vm.PackageId);
 
+            // Get VLAN of 1st Network Interface
+            if (vlan == -1)
+                vlan = GetExternalNetworkVLAN(itemId);
+
             try
             {
                 if (selectRandom)
                 {
-                    List<PackageIPAddress> ips = ServerController.GetPackageUnassignedIPAddresses(vm.PackageId, IPAddressPool.VpsExternalNetwork);
+                    List<PackageIPAddress> packageips = ServerController.GetPackageUnassignedIPAddresses(vm.PackageId, IPAddressPool.VpsExternalNetwork);
+                    List<PackageIPAddress> ips = new List<PackageIPAddress>();
+                    foreach (PackageIPAddress ip in packageips)
+                    {
+                        if (ip.VLAN == vlan)
+                        {
+                            ips.Add(ip);
+                        }
+                    }
                     if (addressesNumber > ips.Count)
                     {
                         TaskManager.CompleteResultTask(res, VirtualizationErrorCodes.NOT_ENOUGH_PACKAGE_IP_ADDRESSES);
@@ -2800,7 +2891,7 @@ namespace SolidCP.EnterpriseServer
                     ServerController.AddItemIPAddress(itemId, addressId);
 
                 // send KVP config items
-                if(provisionKvp)
+                if (provisionKvp)
                     SendNetworkAdapterKVP(itemId, "External");
             }
             catch (Exception ex)
@@ -3881,5 +3972,6 @@ namespace SolidCP.EnterpriseServer
         }
 
         #endregion
+
     }
 }
