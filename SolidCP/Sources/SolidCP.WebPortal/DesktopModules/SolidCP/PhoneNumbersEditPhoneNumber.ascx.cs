@@ -141,7 +141,7 @@ namespace SolidCP.Portal
                             addresses[i] = Utils.ParseInt(ids[i], 0);
 
                         res = ES.Services.Servers.UpdateIPAddresses(addresses,
-                            pool, serverId, "", "", txtComments.Text.Trim());
+                            pool, serverId, "", "", txtComments.Text.Trim(), 0);
                     }
                     else
                     {
@@ -149,7 +149,7 @@ namespace SolidCP.Portal
 
                         // update single IP
                         res = ES.Services.Servers.UpdateIPAddress(PanelRequest.AddressID,
-                            pool, serverId, address, "", "", "", txtComments.Text.Trim());
+                            pool, serverId, address, "", "", "", txtComments.Text.Trim(), 0);
                     }
 
                     if (!res.IsSuccess)
