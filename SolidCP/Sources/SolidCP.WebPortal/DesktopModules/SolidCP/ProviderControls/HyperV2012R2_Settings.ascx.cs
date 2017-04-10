@@ -63,6 +63,14 @@ namespace SolidCP.Portal.ProviderControls
             // bind networks
             BindNetworksList();
 
+            // Guacamole
+            txtGuacamoleConnectScript.Text = settings["GuacamoleConnectScript"];
+            txtGuacamoleConnectPassword.Text = settings["GuacamoleConnectPassword"];
+            txtGuacamoleHyperVDomain.Text = settings["GuacamoleHyperVDomain"];
+            txtGuacamoleHyperVIP.Text = settings["GuacamoleHyperVIP"];
+            ViewState["PWD"] = settings["GuacamoleHyperVAdministratorPassword"];
+            rowPassword.Visible = ((string)ViewState["PWD"]) != "";
+
             // general settings
             txtVpsRootFolder.Text = settings["RootFolder"];
             txtExportedVpsPath.Text = settings["ExportedVpsPath"];
@@ -139,6 +147,13 @@ namespace SolidCP.Portal.ProviderControls
         void IHostingServiceProviderSettings.SaveSettings(StringDictionary settings)
         {
             settings["ServerName"] = txtServerName.Text.Trim();
+
+            // Guacamole
+            settings["GuacamoleConnectScript"] = txtGuacamoleConnectScript.Text.Trim();
+            settings["GuacamoleConnectPassword"] = txtGuacamoleConnectPassword.Text.Trim();
+            settings["GuacamoleHyperVIP"] = txtGuacamoleHyperVIP.Text.Trim();
+            settings["GuacamoleHyperVDomain"] = txtGuacamoleHyperVDomain.Text.Trim();
+            settings["GuacamoleHyperVAdministratorPassword"] = (txtGuacamoleHyperVAdministratorPassword.Text.Length > 0) ? txtGuacamoleHyperVAdministratorPassword.Text : (string)ViewState["PWD"];
 
             // general settings
             settings["RootFolder"] = txtVpsRootFolder.Text.Trim();
@@ -325,6 +340,12 @@ namespace SolidCP.Portal.ProviderControls
         protected void btnConnect_Click(object sender, EventArgs e)
         {
             BindNetworksList();
+        }
+
+        protected void btnguacamolepassword_Click(object sender, EventArgs e)
+        {
+            string guacapassword = VPS2012.guacamole.Encryption.GenerateEncryptionKey();
+            txtGuacamoleConnectPassword.Text = guacapassword;
         }
 
         protected void ddlPrivateNetworkFormat_SelectedIndexChanged(object sender, EventArgs e)

@@ -165,6 +165,14 @@ namespace SolidCP.EnterpriseServer
         }
         #endregion
 
+        #region VNC
+        [WebMethod]
+        public string GetVirtualMachineGuacamoleURL(int itemId)
+        {
+            return VirtualizationServerController2012.GetVirtualMachineGuacamoleURL(itemId);
+        }
+        #endregion
+
         #region VPS Create - Configuration
         [WebMethod]
         public int GetMaximumCpuCoresNumber(int packageId)
@@ -371,6 +379,12 @@ namespace SolidCP.EnterpriseServer
 
         #region VPS - External Network
         [WebMethod]
+        public int GetExternalNetworkVLAN(int itemId)
+        {
+            return VirtualizationServerController2012.GetExternalNetworkVLAN(itemId);
+        }
+
+    [WebMethod]
         public NetworkAdapterDetails GetExternalNetworkAdapterDetails(int itemId)
         {
             return VirtualizationServerController2012.GetExternalNetworkAdapterDetails(itemId);

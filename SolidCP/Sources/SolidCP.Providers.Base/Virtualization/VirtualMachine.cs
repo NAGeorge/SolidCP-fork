@@ -60,6 +60,8 @@ namespace SolidCP.Providers.Virtualization
         [Persistent]
         public string OperatingSystemTemplatePath { get; set; }
         [Persistent]
+        public string OperatingSystemTemplateDeployParams { get; set; }
+        [Persistent]
         public string AdministratorPassword { get; set; }
 
         [Persistent]
@@ -149,5 +151,7 @@ namespace SolidCP.Providers.Virtualization
         [Persistent]
         public string ParentSnapshotId { get; set; }
 
+        public int defaultaccessvlan { get; set; }
+        public VirtualMachineIPAddress PrimaryIP { get; set; }
     }
 }

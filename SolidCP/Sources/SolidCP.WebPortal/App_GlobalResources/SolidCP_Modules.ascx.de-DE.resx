@@ -834,6 +834,9 @@
   <data name="ModuleTitle.RDSServersEditServer" xml:space="preserve">
     <value>RDS-Server bearbeiten</value>
   </data>
+  <data name="ModuleTitle.VirtualPrivateServersProxmox" xml:space="preserve">
+    <value>Virtual Private Servers</value>
+  </data>
   <data name="ModuleTitle.VirtualPrivateServers2012" xml:space="preserve">
     <value>Virtual Private Server</value>
   </data>

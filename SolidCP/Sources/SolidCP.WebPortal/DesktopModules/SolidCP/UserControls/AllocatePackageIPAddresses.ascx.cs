@@ -88,7 +88,7 @@ namespace SolidCP.Portal.UserControls
 
                 // VPS - Gateway Address
                 else if (vps && !String.IsNullOrEmpty(ip.DefaultGateway))
-                    txt += "/" + ip.DefaultGateway;
+                    txt += "/" + ip.DefaultGateway + " [VLAN " + ip.VLAN + "]";
 
                 listExternalAddresses.Items.Add(new ListItem(txt, ip.AddressId.ToString()));
             }
@@ -100,6 +100,8 @@ namespace SolidCP.Portal.UserControls
                 quotaName = Quotas.VPS_EXTERNAL_IP_ADDRESSES_NUMBER;
             else if (String.Compare(ResourceGroup, ResourceGroups.VPS2012, StringComparison.OrdinalIgnoreCase) == 0)
                 quotaName = Quotas.VPS2012_EXTERNAL_IP_ADDRESSES_NUMBER;
+            else if (String.Compare(ResourceGroup, ResourceGroups.Proxmox, StringComparison.OrdinalIgnoreCase) == 0)
+                quotaName = Quotas.PROXMOX_EXTERNAL_IP_ADDRESSES_NUMBER;
 
             PackageContext cntx = PackagesHelper.GetCachedPackageContext(PanelSecurity.PackageId);
             if (cntx.Quotas.ContainsKey(quotaName))

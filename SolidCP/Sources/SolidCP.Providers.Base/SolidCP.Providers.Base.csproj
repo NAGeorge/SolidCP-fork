@@ -358,6 +358,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Virtualization\IVirtualizationServerForPC.cs" />
+    <Compile Include="Virtualization\IVirtualizationServerProxmox.cs" />
     <Compile Include="Virtualization\JobResult.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -395,6 +396,7 @@
     <Compile Include="Virtualization\VirtualMachine.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Virtualization\VirtualMachineIPAddress.cs" />
     <Compile Include="Virtualization\VirtualMachineNetworkAdapter.cs" />
     <Compile Include="Virtualization\VirtualMachineProvisioningStatus.cs" />
     <Compile Include="Virtualization\VirtualMachineRequestedState.cs">

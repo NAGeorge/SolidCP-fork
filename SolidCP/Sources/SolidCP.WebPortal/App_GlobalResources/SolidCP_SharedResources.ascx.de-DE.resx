@@ -5316,6 +5316,12 @@
   <data name="Quota.VPSForPC.StartShutdownAllowed" xml:space="preserve">
     <value>Benutzer darf VPS starten/ausschalten</value>
   </data>
+  <data name="ResourceGroup.Proxmox" xml:space="preserve">
+    <value>Virtual Proxmox Servers</value>
+  </data>
+  <data name="AuditLogSource.Proxmox" xml:space="preserve">
+    <value>Virtual Proxmox Servers</value>
+  </data>
   <data name="ResourceGroup.VPS2012" xml:space="preserve">
     <value>Virtual Private Server 2012</value>
   </data>
@@ -6263,6 +6269,9 @@
   </data>
   <data name="Error.FILES_INCORRECT_FOLDER_NAME" xml:space="preserve">
     <value>Fehler! Ordnername ungültig</value>
+  </data>
+  <data name="SchedulerTask.SCHEDULE_TASK_VPS_SNAPSHOT" xml:space="preserve">
+    <value>VPS Snapshot</value>
   </data>
   <data name="ServiceItemType.MariaDBUser" xml:space="preserve">
     <value>MariaDB-Benutzer</value>

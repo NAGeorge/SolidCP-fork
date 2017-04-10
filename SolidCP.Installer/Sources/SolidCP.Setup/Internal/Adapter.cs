@@ -1781,7 +1781,7 @@ namespace SolidCP.Setup.Internal
             try
             {
                 Log.WriteStart("Adding IP address");
-                IntResult res = ES.Services.Servers.AddIPAddress(IPAddressPool.General, serverId, ip, string.Empty, string.Empty, string.Empty, string.Empty);
+                IntResult res = ES.Services.Servers.AddIPAddress(IPAddressPool.General, serverId, ip, string.Empty, string.Empty, string.Empty, string.Empty, 0);
                 if (res.IsSuccess && res.Value > 0)
                 {
                     Log.WriteEnd("Added IP address");

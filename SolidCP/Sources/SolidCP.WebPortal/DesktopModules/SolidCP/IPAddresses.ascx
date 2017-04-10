@@ -65,6 +65,7 @@
 		</asp:TemplateField>
 		<asp:BoundField DataField="InternalIP" SortExpression="InternalIP" HeaderText="gvIPAddressesInternalIP"></asp:BoundField>
         <asp:BoundField DataField="DefaultGateway" SortExpression="DefaultGateway" HeaderText="gvIPAddressesGateway"></asp:BoundField>
+        <asp:BoundField DataField="VLAN" SortExpression="VLAN" HeaderText="VLAN"></asp:BoundField>
 		<asp:BoundField DataField="ServerName" SortExpression="ServerName" HeaderText="gvIPAddressesServer" ItemStyle-Wrap="false"></asp:BoundField>
 		<asp:TemplateField HeaderText="gvAddressesUser" meta:resourcekey="gvAddressesUser" SortExpression="Username"  >						        
 	        <ItemTemplate>

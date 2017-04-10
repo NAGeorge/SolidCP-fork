@@ -19,6 +19,7 @@ namespace SolidCP.Providers.Virtualization
   <item path=""{0}"" legacyNetworkAdapter=""{1}"" remoteDesktop=""{2}"" processVolume=""{3}"">
     <name>{4}</name>
     <description>{5}</description>
+    <DeployScriptParams>{10}</DeployScriptParams>
     <provisioning>
       {6}
       <vmconfig computerName=""{7}"" administratorPassword=""{8}"" networkAdapters=""{9}"" />
@@ -65,11 +66,15 @@ namespace SolidCP.Providers.Virtualization
             foreach (XmlNode nodeItem in nodeItems)
             {
                 LibraryItem item = new LibraryItem();
-                item.Path = nodeItem.Attributes["path"].Value;
+                if (nodeItem.Attributes["path"] != null)
+                    item.Path = nodeItem.Attributes["path"].Value;
 
                 // optional attributes
                 if (nodeItem.Attributes["diskSize"] != null)
                     item.DiskSize = Int32.Parse(nodeItem.Attributes["diskSize"].Value);
+
+                if (nodeItem.Attributes["DeployScriptParams"] != null)
+                    item.DeployScriptParams = nodeItem.Attributes["DeployScriptParams"].Value;
 
                 if (nodeItem.Attributes["legacyNetworkAdapter"] != null)
                     item.LegacyNetworkAdapter = Boolean.Parse(nodeItem.Attributes["legacyNetworkAdapter"].Value);
@@ -86,6 +91,11 @@ namespace SolidCP.Providers.Virtualization
                 var descriptionNode = nodeItem.SelectSingleNode("description");
                 if (descriptionNode != null)
                     item.Description = descriptionNode.InnerText;
+
+                var DeployScriptParamsNode = nodeItem.SelectSingleNode("DeployScriptParams");
+                if (DeployScriptParamsNode != null)
+                    item.DeployScriptParams = DeployScriptParamsNode.InnerText;
+
 
                 // sysprep files
                 XmlNodeList nodesSyspep = nodeItem.SelectNodes("provisioning/sysprep");
@@ -132,7 +142,7 @@ namespace SolidCP.Providers.Virtualization
                 items.Add(string.Format(itemTemplate, libraryItem.Path, libraryItem.LegacyNetworkAdapter,
                     libraryItem.RemoteDesktop, libraryItem.ProcessVolume, libraryItem.Name, libraryItem.Description,
                     sysprep, libraryItem.ProvisionComputerName, libraryItem.ProvisionAdministratorPassword,
-                    libraryItem.ProvisionNetworkAdapters));
+                    libraryItem.ProvisionNetworkAdapters, libraryItem.DeployScriptParams));
             }
 
             Xml = string.Format(resultTemplate, string.Join("", items.ToArray()));

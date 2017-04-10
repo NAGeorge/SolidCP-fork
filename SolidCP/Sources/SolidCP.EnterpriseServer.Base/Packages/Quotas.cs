@@ -254,6 +254,27 @@ order by rg.groupOrder
 		public const string VPSForPC_REINSTALL_ALLOWED = "VPSForPC.ReinstallAllowed";		// Allow user to Re-install VPS
 		public const string VPSForPC_BANDWIDTH = "VPSForPC.Bandwidth";		// Monthly bandwidth, GB
 
+        public const string PROXMOX_SERVERS_NUMBER = "PROXMOX.ServersNumber";		// Number of VPS
+        public const string PROXMOX_MANAGING_ALLOWED = "PROXMOX.ManagingAllowed";		// Allow user to create VPS
+        public const string PROXMOX_CPU_NUMBER = "PROXMOX.CpuNumber";		// Number of CPU cores
+        public const string PROXMOX_BOOT_CD_ALLOWED = "PROXMOX.BootCdAllowed";		// Boot from CD allowed
+        public const string PROXMOX_BOOT_CD_ENABLED = "PROXMOX.BootCdEnabled";		// Boot from CD
+        public const string PROXMOX_RAM = "PROXMOX.Ram";		// RAM size, MB
+        public const string PROXMOX_HDD = "PROXMOX.Hdd";		// Hard Drive size, GB
+        public const string PROXMOX_DVD_ENABLED = "PROXMOX.DvdEnabled";		// DVD drive
+        public const string PROXMOX_EXTERNAL_NETWORK_ENABLED = "PROXMOX.ExternalNetworkEnabled";		// External Network
+        public const string PROXMOX_EXTERNAL_IP_ADDRESSES_NUMBER = "PROXMOX.ExternalIPAddressesNumber";		// Number of External IP addresses
+        public const string PROXMOX_PRIVATE_NETWORK_ENABLED = "PROXMOX.PrivateNetworkEnabled";		// Private Network
+        public const string PROXMOX_PRIVATE_IP_ADDRESSES_NUMBER = "PROXMOX.PrivateIPAddressesNumber";		// Number of Private IP addresses per VPS
+        public const string PROXMOX_SNAPSHOTS_NUMBER = "PROXMOX.SnapshotsNumber";		// Number of Snaphots
+        public const string PROXMOX_START_SHUTDOWN_ALLOWED = "PROXMOX.StartShutdownAllowed";		// Allow user to Start, Turn off and Shutdown VPS
+        public const string PROXMOX_PAUSE_RESUME_ALLOWED = "PROXMOX.PauseResumeAllowed";		// Allow user to Pause, Resume VPS
+        public const string PROXMOX_REBOOT_ALLOWED = "PROXMOX.RebootAllowed";		// Allow user to Reboot VPS
+        public const string PROXMOX_RESET_ALOWED = "PROXMOX.ResetAlowed";		// Allow user to Reset VPS
+        public const string PROXMOX_REINSTALL_ALLOWED = "PROXMOX.ReinstallAllowed";		// Allow user to Re-install VPS
+        public const string PROXMOX_BANDWIDTH = "PROXMOX.Bandwidth";		// Monthly bandwidth, GB
+        public const string PROXMOX_REPLICATION_ENABLED = "PROXMOX.ReplicationEnabled";
+
         public const string BLACKBERRY_USERS = "BlackBerry.Users";
 
         public const string OCS_USERS = "OCS.Users";

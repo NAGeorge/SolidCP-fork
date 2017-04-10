@@ -60,6 +60,12 @@
 	            <scp:EditIPAddressControl id="defaultGateway" runat="server" ValidationGroup="EditAddress" Required="true"  />
             </td>
         </tr>
+        <tr id="VLANRow" runat="server">
+	        <td><asp:Localize ID="locVLAN" runat="server" meta:resourcekey="locVLAN" Text="VLAN:"></asp:Localize></td>
+	        <td class="NormalBold">
+	            <scp:EditIPAddressControl id="VLAN" runat="server" Required="true" Text="" />
+            </td>
+        </tr>
 	    <tr>
 		    <td>
                 <asp:Localize ID="lblComments" runat="server" meta:resourcekey="lblComments" Text="Comments:"></asp:Localize>

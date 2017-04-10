@@ -91,6 +91,7 @@ namespace SolidCP.Portal
                 internalIP.Text = addr.InternalIP;
                 subnetMask.Text = addr.SubnetMask;
                 defaultGateway.Text = addr.DefaultGateway;
+                VLAN.Text = addr.VLAN.ToString();
                 txtComments.Text = addr.Comments;
 
                 ToggleControls();
@@ -121,14 +122,33 @@ namespace SolidCP.Portal
             Response.Redirect(returnUrl);
         }
 
-        protected void btnUpdate_Click(object sender, EventArgs e)
+       protected void btnUpdate_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
                 try
                 {
+                    bool vps = ddlPools.SelectedIndex > 1;
                     int serverId = Utils.ParseInt(ddlServer.SelectedValue, 0);
                     IPAddressPool pool = (IPAddressPool)Enum.Parse(typeof(IPAddressPool), ddlPools.SelectedValue, true);
+                    int vlantag = 0;
+                    try
+                    {
+                        vlantag = Convert.ToInt32(VLAN.Text);
+                    }
+                    catch
+                    {
+                        vlantag = 0;
+                    }
+                    if (vps)
+                    {
+                        if (vlantag > 4096 || vlantag < 0)
+                        {
+                            ShowErrorMessage("Error updating IP address - Invalid VLAN TAG", "VLANTAG");
+                            return;
+                        }
+
+                    }
 
                     ResultObject res = null;
 
@@ -142,13 +162,13 @@ namespace SolidCP.Portal
                             addresses[i] = Utils.ParseInt(ids[i], 0);
 
                         res = ES.Services.Servers.UpdateIPAddresses(addresses,
-                            pool, serverId, subnetMask.Text, defaultGateway.Text, txtComments.Text.Trim());
+                            pool, serverId, subnetMask.Text, defaultGateway.Text, txtComments.Text.Trim(), vlantag);
                     }
                     else
                     {
                         // update single IP
                         res = ES.Services.Servers.UpdateIPAddress(PanelRequest.AddressID,
-                            pool, serverId, externalIP.Text, internalIP.Text, subnetMask.Text, defaultGateway.Text, txtComments.Text.Trim());
+                            pool, serverId, externalIP.Text, internalIP.Text, subnetMask.Text, defaultGateway.Text, txtComments.Text.Trim(), vlantag);
                     }
 
                     if (!res.IsSuccess)

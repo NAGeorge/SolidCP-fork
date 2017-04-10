@@ -205,6 +205,9 @@
                                     <p>
                                         <asp:CheckBox ID="chkExternalNetworkEnabled" runat="server" AutoPostBack="true" Checked="true"
                                                     meta:resourcekey="chkExternalNetworkEnabled" Text="External network enabled" />
+                                        <asp:DropDownList ID="listVlanLists" runat="server"
+                                                    DataValueField="Path" DataTextField="Name" AutoPostBack="true" onselectedindexchanged="VlanLists_SelectedIndexChanged">
+                                                </asp:DropDownList>
                                     </p>
                                     
                                      <div runat="server" ID="EmptyExternalAddressesMessage" style="padding: 5px;" visible="false">

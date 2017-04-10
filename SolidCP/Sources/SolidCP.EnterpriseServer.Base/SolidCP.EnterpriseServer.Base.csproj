@@ -153,6 +153,7 @@
     <Compile Include="Servers\ServerInfo.cs" />
     <Compile Include="Servers\ServiceInfo.cs" />
     <Compile Include="Servers\VirtualGroupInfo.cs" />
+    <Compile Include="Virtualization\AvailableVLANList.cs" />
     <Compile Include="Virtualization\NetworkAdapterDetails.cs">
       <SubType>Code</SubType>
     </Compile>

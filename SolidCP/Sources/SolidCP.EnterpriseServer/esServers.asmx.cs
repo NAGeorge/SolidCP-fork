@@ -390,30 +390,30 @@ namespace SolidCP.EnterpriseServer
 
         [WebMethod]
         public IntResult AddIPAddress(IPAddressPool pool, int serverId,
-            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments)
+            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN)
         {
-            return ServerController.AddIPAddress(pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments);
+            return ServerController.AddIPAddress(pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, VLAN);
         }
 
         [WebMethod]
         public ResultObject AddIPAddressesRange(IPAddressPool pool, int serverId,
-            string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments)
+            string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN)
         {
-            return ServerController.AddIPAddressesRange(pool, serverId, externalIP, endIP, internalIP, subnetMask, defaultGateway, comments);
+            return ServerController.AddIPAddressesRange(pool, serverId, externalIP, endIP, internalIP, subnetMask, defaultGateway, comments, VLAN);
         }
 
         [WebMethod]
         public ResultObject UpdateIPAddress(int addressId, IPAddressPool pool, int serverId,
-            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments)
+            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN)
         {
-            return ServerController.UpdateIPAddress(addressId, pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments);
+            return ServerController.UpdateIPAddress(addressId, pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, VLAN);
         }
 
         [WebMethod]
         public ResultObject UpdateIPAddresses(int[] addresses, IPAddressPool pool, int serverId,
-            string subnetMask, string defaultGateway, string comments)
+            string subnetMask, string defaultGateway, string comments, int VLAN)
         {
-            return ServerController.UpdateIPAddresses(addresses, pool, serverId, subnetMask, defaultGateway, comments);
+            return ServerController.UpdateIPAddresses(addresses, pool, serverId, subnetMask, defaultGateway, comments, VLAN);
         }
 
         [WebMethod]

@@ -6,11 +6,14 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SolidCP.Providers.Virtualization
 {
     public static class NetworkAdapterHelper
     {
+        private const int defaultvlan = 0;
+
         public static VirtualMachineNetworkAdapter[] Get(PowerShellManager powerShell, string vmName)
         {
             List<VirtualMachineNetworkAdapter> adapters = new List<VirtualMachineNetworkAdapter>();
@@ -18,17 +21,34 @@ namespace SolidCP.Providers.Virtualization
             Command cmd = new Command("Get-VMNetworkAdapter");
             if (!string.IsNullOrEmpty(vmName)) cmd.Parameters.Add("VMName", vmName);
 
+            Command cmdvlan = new Command("Get-VMNetworkAdapterVlan");
+            if (!string.IsNullOrEmpty(vmName)) cmdvlan.Parameters.Add("VMName", vmName);
+
             Collection<PSObject> result = powerShell.Execute(cmd, true);
+            Collection<PSObject> resultvlan = powerShell.Execute(cmdvlan, true);
+            int i = 0;
             if (result != null && result.Count > 0)
             {
                 foreach (PSObject psAdapter in result)
                 {
                     VirtualMachineNetworkAdapter adapter = new VirtualMachineNetworkAdapter();
 
-                    adapter.Name = psAdapter.GetString("Name");
+                    //adapter.Name = psAdapter.GetString("Name");
                     adapter.MacAddress = psAdapter.GetString("MacAddress");
                     adapter.SwitchName = psAdapter.GetString("SwitchName");
 
+                    try
+                    {
+                        adapter.vlan = resultvlan[i].GetInt("AccessVlanId");
+                    }
+                    catch
+                    {
+                        adapter.vlan = defaultvlan;
+                    }
+                    if (adapter.vlan == 0)
+                        adapter.vlan = defaultvlan;
+                    adapter.Name = String.Format("{0} VLAN: {1}", psAdapter.GetString("Name"), adapter.vlan.ToString());
+                    i++;
                     adapters.Add(adapter);
                 }
             }
@@ -50,9 +70,17 @@ namespace SolidCP.Providers.Virtualization
                 vm.ExternalNicMacAddress = null; // reset MAC
             }
             else if (vm.ExternalNetworkEnabled && !String.IsNullOrEmpty(vm.ExternalNicMacAddress)
-                && Get(powerShell,vm.Name,vm.ExternalNicMacAddress) == null)
+                && Get(powerShell, vm.Name, vm.ExternalNicMacAddress) == null)
             {
                 Add(powerShell, vm.Name, vm.ExternalSwitchId, vm.ExternalNicMacAddress, Constants.EXTERNAL_NETWORK_ADAPTER_NAME, vm.LegacyNetworkAdapter);
+                try
+                {
+                    SetVLAN(powerShell, vm.Name, vm.defaultaccessvlan);
+                }
+                catch (Exception ex)
+                {
+                    HostedSolution.HostedSolutionLog.LogError("NetworkAdapterHelperSetVLAN", ex);
+                }
             }
 
             // Private NIC
@@ -82,6 +110,21 @@ namespace SolidCP.Providers.Virtualization
                 cmd.Parameters.Add("StaticMacAddress", macAddress);
 
             powerShell.Execute(cmd, true);
+
+        }
+
+        public static void SetVLAN(PowerShellManager powerShell, string vmName, int vlan)
+        {
+            if (vlan >= 1)
+            {
+                Command cmd = new Command("Set-VMNetworkAdapterVlan");
+
+                cmd.Parameters.Add("VMName", vmName);
+                cmd.Parameters.Add("Access");
+                cmd.Parameters.Add("VlanId", vlan.ToString());
+
+                powerShell.Execute(cmd, true);
+            }
         }
 
         public static void Delete(PowerShellManager powerShell, string vmName, string macAddress)

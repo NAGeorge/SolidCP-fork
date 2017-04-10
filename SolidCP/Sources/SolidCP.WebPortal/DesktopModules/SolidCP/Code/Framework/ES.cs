@@ -79,6 +79,11 @@ namespace SolidCP.Portal
             get { return GetCachedProxy<esVirtualizationServer2012>(); }
         }
 
+        public esVirtualizationServerProxmox Proxmox
+        {
+            get { return GetCachedProxy<esVirtualizationServerProxmox>(); }
+        }
+
         public esVirtualizationServerForPrivateCloud VPSPC
         {
             get { return GetCachedProxy<esVirtualizationServerForPrivateCloud>(); }

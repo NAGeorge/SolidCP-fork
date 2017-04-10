@@ -152,25 +152,48 @@ namespace SolidCP.Portal.VPS2012
 
         public void BindExternalAddresses()
         {
-            BindAddresses(ExternalAddresses, IPAddressPool.VpsExternalNetwork);
+            BindAddresses(ExternalAddresses, IPAddressPool.VpsExternalNetwork, ExternalAdapters.SelectedValue);
         }
 
         public void BindManagementAddresses()
         {
-            BindAddresses(ManagementAddresses, IPAddressPool.VpsManagementNetwork);
+            BindAddresses(ManagementAddresses, IPAddressPool.VpsManagementNetwork, ExternalAdapters.SelectedValue);
         }
 
-        public void BindAddresses(ListBox list, IPAddressPool pool)
+        public void BindAddresses(ListBox list, IPAddressPool pool, string selectedmac)
         {
-            IPAddressInfo[] ips = ES.Services.Servers.GetUnallottedIPAddresses(PanelSecurity.PackageId, ResourceGroups.VPS2012, pool);
+            int serviceId = Utils.ParseInt(HyperVServices.SelectedValue, 0);
+            string vmId = VirtualMachines.SelectedValue;
+            int adaptervlan = 0;
+            if (serviceId > 0 && vmId != "")
+            {
+                VirtualMachine vm = ES.Services.VPS2012.GetVirtualMachineExtendedInfo(serviceId, vmId);
+                if (vm != null)
+                {
+                    foreach (VirtualMachineNetworkAdapter adapter in vm.Adapters)
+                    {
+                        if (adapter.MacAddress == selectedmac)
+                        {
+                            adaptervlan = adapter.vlan;
+                        }
+                    }
+                }
+            }
+            list.Items.Clear();
+            //IPAddressInfo[] ips = ES.Services.Servers.GetUnallottedIPAddresses(PanelSecurity.PackageId, ResourceGroups.VPS2012, pool);
+            IPAddressInfo[] ips = ES.Services.Servers.GetUnallottedIPAddresses(-1, serviceId.ToString(), pool);
             foreach (IPAddressInfo ip in ips)
             {
-                string txt = ip.ExternalIP;
-                if (!String.IsNullOrEmpty(ip.DefaultGateway))
-                    txt += "/" + ip.DefaultGateway;
-                list.Items.Add(new ListItem(txt, ip.AddressId.ToString()));
+                if (ip.VLAN == adaptervlan)
+                {
+                    string txt = ip.ExternalIP;
+                    if (!String.IsNullOrEmpty(ip.DefaultGateway))
+                        txt += "/" + ip.DefaultGateway;
+                    list.Items.Add(new ListItem(txt, ip.AddressId.ToString()));
+                }
             }
         }
+
 
         protected void btnImport_Click(object sender, EventArgs e)
         {
@@ -233,6 +256,15 @@ namespace SolidCP.Portal.VPS2012
         {
             BindVirtualMachineDetails();
             ToggleControls();
+        }
+        protected void ExternalAdapters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindExternalAddresses();
+        }
+
+        protected void ManagementAdapters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindManagementAddresses();
         }
     }
 }

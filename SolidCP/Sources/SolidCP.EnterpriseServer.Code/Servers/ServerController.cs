@@ -1043,7 +1043,7 @@ namespace SolidCP.EnterpriseServer
         }
 
         public static IntResult AddIPAddress(IPAddressPool pool, int serverId,
-            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments)
+            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN)
         {
             IntResult res = new IntResult();
 
@@ -1062,7 +1062,7 @@ namespace SolidCP.EnterpriseServer
             try
             {
                 res.Value = DataProvider.AddIPAddress((int)pool, serverId, externalIP, internalIP,
-                                            subnetMask, defaultGateway, comments);
+                                            subnetMask, defaultGateway, comments, VLAN);
 
             }
             catch (Exception ex)
@@ -1076,7 +1076,7 @@ namespace SolidCP.EnterpriseServer
         }
 
         public static ResultObject AddIPAddressesRange(IPAddressPool pool, int serverId,
-            string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments)
+            string externalIP, string endIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN)
         {
             const int MaxSubnet = 512; // TODO bigger max subnet?
 
@@ -1100,7 +1100,7 @@ namespace SolidCP.EnterpriseServer
                 if (externalIP == endIP)
                 {
                     // add single IP and exit
-                    AddIPAddress(pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments);
+                    AddIPAddress(pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, VLAN);
                     TaskManager.CompleteResultTask();
                     return res;
                 }
@@ -1119,7 +1119,7 @@ namespace SolidCP.EnterpriseServer
                     end = Math.Min(end, start + maxPhones);
 
                     for (UInt64 number = start; number <= end; number++)
-                        DataProvider.AddIPAddress((int)pool, serverId, number.ToString(phoneFormat), "", subnetMask, defaultGateway, comments);
+                        DataProvider.AddIPAddress((int)pool, serverId, number.ToString(phoneFormat), "", subnetMask, defaultGateway, comments, VLAN);
                 }
 
                 else
@@ -1146,7 +1146,7 @@ namespace SolidCP.EnterpriseServer
                             break;
 
                         // add IP address
-                        DataProvider.AddIPAddress((int)pool, serverId, startExternalIP.ToString(), startInternalIP.ToString(), subnetMask, defaultGateway, comments);
+                        DataProvider.AddIPAddress((int)pool, serverId, startExternalIP.ToString(), startInternalIP.ToString(), subnetMask, defaultGateway, comments, VLAN);
 
                         if (startExternalIP == endExternalIP)
                             break;
@@ -1171,7 +1171,7 @@ namespace SolidCP.EnterpriseServer
         }
 
         public static ResultObject UpdateIPAddress(int addressId, IPAddressPool pool, int serverId,
-            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments)
+            string externalIP, string internalIP, string subnetMask, string defaultGateway, string comments, int VLAN)
         {
             ResultObject res = new ResultObject();
 
@@ -1186,7 +1186,7 @@ namespace SolidCP.EnterpriseServer
 
             try
             {
-                DataProvider.UpdateIPAddress(addressId, (int)pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments);
+                DataProvider.UpdateIPAddress(addressId, (int)pool, serverId, externalIP, internalIP, subnetMask, defaultGateway, comments, VLAN);
             }
             catch (Exception ex)
             {
@@ -1199,7 +1199,7 @@ namespace SolidCP.EnterpriseServer
         }
 
         public static ResultObject UpdateIPAddresses(int[] addresses, IPAddressPool pool, int serverId,
-            string subnetMask, string defaultGateway, string comments)
+            string subnetMask, string defaultGateway, string comments, int VLAN)
         {
             ResultObject res = new ResultObject();
 
@@ -1215,7 +1215,7 @@ namespace SolidCP.EnterpriseServer
             try
             {
                 string xmlIds = PrepareIPsXML(addresses);
-                DataProvider.UpdateIPAddresses(xmlIds, (int)pool, serverId, subnetMask, defaultGateway, comments);
+                DataProvider.UpdateIPAddresses(xmlIds, (int)pool, serverId, subnetMask, defaultGateway, comments, VLAN);
             }
             catch (Exception ex)
             {
@@ -1327,8 +1327,12 @@ namespace SolidCP.EnterpriseServer
 
         public static List<IPAddressInfo> GetUnallottedIPAddresses(int packageId, string groupName, IPAddressPool pool)
         {
-            // get service ID
-            int serviceId = PackageController.GetPackageServiceId(packageId, groupName);
+
+            int serviceId = 0;
+            bool servicebyid = int.TryParse(groupName, out serviceId);
+            if (!servicebyid) // get service ID
+                serviceId = PackageController.GetPackageServiceId(packageId, groupName);
+
 
             // get unallotted addresses
             return ObjectUtils.CreateListFromDataReader<IPAddressInfo>(
@@ -1596,6 +1600,10 @@ namespace SolidCP.EnterpriseServer
             else if (String.Compare(groupName, ResourceGroups.VPSForPC, true) == 0)
             {
                 return Quotas.VPSForPC_EXTERNAL_IP_ADDRESSES_NUMBER;
+            }
+            else if (String.Compare(groupName, ResourceGroups.Proxmox, true) == 0)
+            {
+                return Quotas.PROXMOX_EXTERNAL_IP_ADDRESSES_NUMBER;
             }
             else
             {
