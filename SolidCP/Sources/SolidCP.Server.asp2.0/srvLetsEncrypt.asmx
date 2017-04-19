@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="srvLetsEncrypt.asmx.cs" Class="SolidCP.Providers.srvLetsEncrypt" %>
