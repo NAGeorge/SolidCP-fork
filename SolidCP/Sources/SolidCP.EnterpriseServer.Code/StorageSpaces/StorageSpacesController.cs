@@ -508,7 +508,7 @@ namespace SolidCP.EnterpriseServer
         private static string GenerateShareName(string organizationId, string folderName)
         {
             var hiddenfolderName = folderName + "$";
-            return string.Join("-", organizationId, folderName);
+            return string.Join("-", organizationId, hiddenfolderName);
         }
 
         public static ResultObject UpdateStorageSpaceFolder(int storageSpaceId, int storageSpaceFolderId, string organizationId, string groupName, string folderName, string uncPath, long quotaInBytes, QuotaType quotaType)
