@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnDelete.OnClientClick" xml:space="preserve">
     <value>if(!confirm('Sind Sie sicher, dass Sie diesen Benutzer löschen wollen?')){ShowProgressDialog('Lösche BlackBerry-Benutzer ...');return true;} else {return false};</value>
@@ -158,5 +158,17 @@
   </data>
   <data name="FormComments.Text" xml:space="preserve">
     <value>Geben Sie hier ein kurzfristiges Passwort an, dass zur kabellosen Aktivierung des Kontos (/der Konten) benutzt wird. Das Passwort wird angelegt wenn das Konto aktiviert wird oder die Aktivierung nicht vor der Ablaufzeit gelingt.</value>
+  </data>
+  <data name="btnDeleteDataText.Text" xml:space="preserve">
+    <value>Daten vom BlackBerry-Gerät löschen</value>
+  </data>
+  <data name="btnDeleteText.Text" xml:space="preserve">
+    <value>Benutzer löschen</value>
+  </data>
+  <data name="btnSaveExit.Text" xml:space="preserve">
+    <value>Save Changes and Exit</value>
+  </data>
+  <data name="btnSaveExitText.Text" xml:space="preserve">
+    <value>Save Changes and Exit</value>
   </data>
 </root>

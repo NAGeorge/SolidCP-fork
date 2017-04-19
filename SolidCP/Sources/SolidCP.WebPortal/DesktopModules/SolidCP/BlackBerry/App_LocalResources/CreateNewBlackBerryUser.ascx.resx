@@ -132,4 +132,7 @@
   <data name="FormComments.Text" xml:space="preserve">
     <value />
   </data>
+  <data name="btnCreateText.Text" xml:space="preserve">
+    <value>Add BlackBerry User</value>
+  </data>
 </root>

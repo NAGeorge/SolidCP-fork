@@ -159,4 +159,16 @@
   <data name="FormComments.Text" xml:space="preserve">
     <value />
   </data>
+  <data name="btnDeleteDataText.Text" xml:space="preserve">
+    <value>Delete data from BlackBerry device</value>
+  </data>
+  <data name="btnDeleteText.Text" xml:space="preserve">
+    <value>Delete User</value>
+  </data>
+  <data name="btnSaveExit.Text" xml:space="preserve">
+    <value>Save Changes and Exit</value>
+  </data>
+  <data name="btnSaveExitText.Text" xml:space="preserve">
+    <value>Save Changes and Exit</value>
+  </data>
 </root>

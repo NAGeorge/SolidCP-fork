@@ -145,7 +145,7 @@ namespace SolidCP.Portal.BlackBerry {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-       protected global::CPCC.StyleButton btnSetPassword;
+        protected global::CPCC.StyleButton btnSetPassword;
         
         /// <summary>
         /// dvStats control.
@@ -163,7 +163,7 @@ namespace SolidCP.Portal.BlackBerry {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-       protected global::CPCC.StyleButton btnDelete;
+        protected global::CPCC.StyleButton btnDelete;
         
         /// <summary>
         /// btnDeleteData control.
@@ -172,15 +172,15 @@ namespace SolidCP.Portal.BlackBerry {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-       protected global::CPCC.StyleButton btnDeleteData;
+        protected global::CPCC.StyleButton btnDeleteData;
         
         /// <summary>
-        /// btnSave control.
+        /// btnSaveExit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-       protected global::CPCC.StyleButton btnSave;
+        protected global::CPCC.StyleButton btnSaveExit;
     }
 }

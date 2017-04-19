@@ -73,9 +73,9 @@
                     </asp:GridView>
                         
 					<div class="panel-footer text-right">
-					<CPCC:StyleButton id="btnDelete" CssClass="btn btn-danger" runat="server" OnClick="btnDelete_Click" CausesValidation="false"> <i class="fa fa-trash-o">&nbsp;</i>&nbsp;<asp:Localize runat="server" meta:resourcekey="btnDelete"/> </CPCC:StyleButton>&nbsp; 
-                    <CPCC:StyleButton id="btnDeleteData" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteData_Click" CausesValidation="false"> <i class="fa fa-database">&nbsp;</i>&nbsp;<asp:Localize runat="server" meta:resourcekey="btnDeleteData"/> </CPCC:StyleButton>&nbsp; 
-                    <CPCC:StyleButton id="btnSave" CssClass="btn btn-success" runat="server" OnClick="btnSave_Click"> <i class="fa fa-floppy-o">&nbsp;</i>&nbsp;<asp:Localize runat="server" meta:resourcekey="btnSave"/> </CPCC:StyleButton>
+					<CPCC:StyleButton id="btnDelete" CssClass="btn btn-danger" runat="server" OnClick="btnDelete_Click" CausesValidation="false"> <i class="fa fa-trash-o">&nbsp;</i>&nbsp;<asp:Localize runat="server" meta:resourcekey="btnDeleteText"/> </CPCC:StyleButton>&nbsp; 
+                    <CPCC:StyleButton id="btnDeleteData" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteData_Click" CausesValidation="false"> <i class="fa fa-database">&nbsp;</i>&nbsp;<asp:Localize runat="server" meta:resourcekey="btnDeleteDataText"/> </CPCC:StyleButton>&nbsp; 
+                    <CPCC:StyleButton id="btnSaveExit" CssClass="btn btn-success" runat="server" OnClick="btnSaveExit_Click"> <i class="fa fa-floppy-o">&nbsp;</i>&nbsp;<asp:Localize runat="server" meta:resourcekey="btnSaveExitText"/> </CPCC:StyleButton>
 				    </div>	
                 </div>
             </div>
