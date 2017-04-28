@@ -219,7 +219,7 @@ namespace SolidCP.Setup.Actions
 			try
 			{
 				Log.WriteStart("Adding IP address");
-				IntResult res = ES.Services.Servers.AddIPAddress(IPAddressPool.General, serverId, ip, String.Empty, String.Empty, String.Empty, String.Empty, 0);
+				IntResult res = ES.Services.Servers.AddIPAddress(IPAddressPool.General, serverId, ip, String.Empty, String.Empty, String.Empty, String.Empty);
 				if (res.IsSuccess && res.Value > 0)
 				{
 					Log.WriteEnd("Added IP address");
