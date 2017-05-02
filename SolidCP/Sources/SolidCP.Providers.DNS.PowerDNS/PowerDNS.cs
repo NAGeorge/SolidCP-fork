@@ -249,7 +249,7 @@ namespace SolidCP.Providers.DNS
         /// <param name="secondaryServers">IP Addresses of servers bound to Power DNS server</param>
         public void AddPrimaryZone(string zoneName, string[] secondaryServers)
         {
-            PDNSAddZone(zoneName, "NATIVE", secondaryServers);
+            PDNSAddZone(zoneName, "MASTER", secondaryServers);
         }
 
 
