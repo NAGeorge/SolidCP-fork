@@ -172,7 +172,7 @@
   </component>
 
   <!-- SolidCP Server -->
-  <component application="SolidCP" name="Server" code="server">
+  <component application="SolidCP" name="Server asp.net v4.5" code="server">
     <description>SolidCP Server is a set of services running on the remote server to be controlled. Server application should be reachable from Enterprise Server one.</description>
     <releases>
       <release version="1.2.0" date="31/03/2017" available="true" beta="false">
@@ -223,6 +223,20 @@
         <upgradeFilePath></upgradeFilePath>
         <installerPath>setup\setup.dll</installerPath>
         <installerType>SolidCP.Setup.Server101</installerType>
+      </release>
+    </releases>
+  </component>
+
+  <!-- SolidCP Server -->
+  <component application="SolidCP" name="Server asp.net v2.0" code="serveraspv2">
+    <description>SolidCP Server asp.net 2.0 is a SolidCP Server module for Exchange 2010. It has limited functionality mainly aimed to support software that can not run on asp.net 4.5 (like exchange 2010).</description>
+    <releases>
+      <release version="1.2.0" date="28/04/2017" available="true" beta="false">
+        <releaseFileID>620</releaseFileID>
+        <fullFilePath>~/Files/1.2.0/SolidCP-Server-asp-v2.zip</fullFilePath>
+        <upgradeFilePath>~/Files/1.2.0/SolidCP-Server-asp-v2-Update.zip</upgradeFilePath>
+        <installerPath>setup\setup.dll</installerPath>
+        <installerType>SolidCP.Setup.Serveraspv2120</installerType>
       </release>
     </releases>
   </component>

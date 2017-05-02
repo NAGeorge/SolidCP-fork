@@ -149,6 +149,8 @@
     <Compile Include="Internal\XmlDocumentMerge.cs" />
     <Compile Include="Portal10.cs" />
     <Compile Include="Portal20.cs" />
+    <Compile Include="Serveraspv210.cs" />
+    <Compile Include="Serveraspv2.cs" />
     <Compile Include="Server10.cs" />
     <Compile Include="Server20.cs" />
     <Compile Include="StandaloneServerSetup.cs" />
