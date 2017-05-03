@@ -813,12 +813,14 @@ namespace SolidCP.Providers.Web
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("ServiceProviderSettingsSoapHeaderValue")]
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://smbsaas/solidcp/server/installPFX", RequestNamespace = "http://smbsaas/solidcp/server/", ResponseNamespace = "http://smbsaas/solidcp/server/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SSLCertificate installPFX([System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")] byte[] certificate, string password, WebSite website)
+        public SSLCertificate installPFX([System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")] byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
         {
             object[] results = this.Invoke("installPFX", new object[] {
                         certificate,
                         password,
-                        website});
+                        website,
+                        friendlyName,
+                        SANs});
             return ((SSLCertificate)(results[0]));
         }
 
@@ -829,12 +831,14 @@ namespace SolidCP.Providers.Web
         }
 
         /// <remarks/>
-        public System.IAsyncResult BegininstallPFX(byte[] certificate, string password, WebSite website, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BegininstallPFX(byte[] certificate, string password, WebSite website, string friendlyName, string SANs, System.AsyncCallback callback, object asyncState)
         {
             return this.BeginInvoke("installPFX", new object[] {
                         certificate,
                         password,
-                        website}, callback, asyncState);
+                        website,
+                        friendlyName,
+                        SANs}, callback, asyncState);
         }
 
         /// RB Added For LetsEncrypt
@@ -851,13 +855,13 @@ namespace SolidCP.Providers.Web
         }
 
         /// <remarks/>
-        public void installPFXAsync(byte[] certificate, string password, WebSite website)
+        public void installPFXAsync(byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
         {
-            this.installPFXAsync(certificate, password, website, null);
+            this.installPFXAsync(certificate, password, website, friendlyName, SANs, null);
         }
 
         /// <remarks/>
-        public void installPFXAsync(byte[] certificate, string password, WebSite website, object userState)
+        public void installPFXAsync(byte[] certificate, string password, WebSite website, string friendlyName, string SANs, object userState)
         {
             if ((this.installPFXOperationCompleted == null))
             {
@@ -866,7 +870,9 @@ namespace SolidCP.Providers.Web
             this.InvokeAsync("installPFX", new object[] {
                         certificate,
                         password,
-                        website}, this.installPFXOperationCompleted, userState);
+                        website,
+                        friendlyName,
+                        SANs}, this.installPFXOperationCompleted, userState);
         }
 
         // RB Added for LetsEncrypt

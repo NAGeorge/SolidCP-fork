@@ -615,9 +615,9 @@ namespace SolidCP.EnterpriseServer
         }
 
         [WebMethod]
-        public ResultObject InstallPfx(byte[] certificate, int siteItemId, string password)
+        public ResultObject InstallPfx(byte[] certificate, int siteItemId, string password, string friendlyName, string SANs)
         {
-            return WebServerController.InstallPfx(certificate, siteItemId, password);
+            return WebServerController.InstallPfx(certificate, siteItemId, password, friendlyName, SANs);
         }
         [WebMethod]
         public List<SSLCertificate> GetPendingCertificates(int siteItemId)

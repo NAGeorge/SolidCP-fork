@@ -141,11 +141,11 @@ namespace SolidCP.Providers.Web
             return sslObjectService.DeleteCertificate(certificate, website);
         }
 
-        public override SSLCertificate installPFX(byte[] certificate, string password, WebSite website)
+        public override SSLCertificate installPFX(byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
         {
             var sslObjectService = new SSLModuleService100(SSLFlags, CCSUncPath, CCSCommonPassword);
 			
-			return sslObjectService.InstallPfx(certificate, password, website);
+			return sslObjectService.InstallPfx(certificate, password, website, friendlyName, SANs);
         }
 
         public override SSLCertificate ImportCertificate(WebSite website)

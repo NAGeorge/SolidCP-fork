@@ -4772,11 +4772,11 @@ namespace SolidCP.Providers.Web
 			return sslObjectService.GetServerCertificates();
 		}
 
-		public override SSLCertificate installPFX(byte[] certificate, string password, WebSite website)
+		public override SSLCertificate installPFX(byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
 		{
 			var sslObjectService = new SSLModuleService();
 			//
-			return sslObjectService.InstallPfx(certificate, password, website);
+			return sslObjectService.InstallPfx(certificate, password, website, friendlyName, SANs);
 		}
 
 		public override byte[] exportCertificate(string serialNumber, string password)

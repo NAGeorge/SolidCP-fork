@@ -89,7 +89,7 @@ namespace SolidCP.Providers.Web.Iis
                 if (UseCCS)
                 {
                     // Revert to InstallPfx to install new certificate - this also adds binding
-                    InstallPfx(certData, string.Empty, website);
+                    InstallPfx(certData, string.Empty, website, string.Empty, string.Empty);
                 }
                 else
                 {
@@ -160,7 +160,7 @@ namespace SolidCP.Providers.Web.Iis
             return certificate ?? (new SSLCertificate {Success = false, Certificate = "No certificate in binding on server, please remove or edit binding"});
 		}
         
-        public new SSLCertificate InstallPfx(byte[] certificate, string password, WebSite website)
+        public new SSLCertificate InstallPfx(byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
 		{
             SSLCertificate newcert = null, oldcert = null;
 
@@ -177,6 +177,7 @@ namespace SolidCP.Providers.Web.Iis
 		    {
 		        // We need to use this constructor or we won't be able to export this certificate
 		        x509Cert = new X509Certificate2(certificate, password, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
+                x509Cert.FriendlyName = friendlyName;
 
 		        var certData = x509Cert.Export(X509ContentType.Pfx);
 		        var convertedCert = new X509Certificate2(certData, string.Empty, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
@@ -206,6 +207,7 @@ namespace SolidCP.Providers.Web.Iis
 		    else
 		    {
 		        x509Cert = new X509Certificate2(certificate, password, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
+                x509Cert.FriendlyName = friendlyName;
 
 		        // Step 1: Register X.509 certificate in the store
 		        // Trying to keep X.509 store open as less as possible

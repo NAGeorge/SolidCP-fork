@@ -110,7 +110,7 @@ namespace SolidCP.Portal
             }
             if (InstalledCert != null && InstalledCert.IsLetsEncryptCertificate)
             {
-                btnRenew.Visible = false;
+                btnRenew.Visible = true;
                 //btnRenew.OnClientClick = string.Concat("return confirm('", GetLocalizedString("sslLetsEncryptRenewConfirmation"), "');");
             }
             if (!IsPostBack)
@@ -122,7 +122,7 @@ namespace SolidCP.Portal
                 ProviderInfo packageServiceProvider = ES.Services.Servers.GetPackageServiceProvider(PanelSecurity.PackageId, "Web");
                 if(result == true && packageServiceProvider.ProviderId == 101)
                 {
-                    btnShowLetsEncrypt.Visible =true;
+                    btnShowLetsEncrypt.Visible = true;
                 }
                 if (result && packageServiceProvider.ProviderId == 105)
                 {

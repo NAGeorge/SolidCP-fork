@@ -4581,102 +4581,94 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
 
         public static StringArrayResultObject InstallLetsEncryptCertificate(int siteId, string hostName, string[] SANs)
         {
-            StringArrayResultObject stringArrayResultObject = new StringArrayResultObject()
-            {
-                IsSuccess = true
-            };
+            StringArrayResultObject installresult = new StringArrayResultObject { IsSuccess = true };
             try
             {
-                try
+                WebSite webSite = GetWebSite(siteId);
+                TaskManager.StartTask("LOG_SOURCE_WEB", "Install LetsEncrypt Certificate", webSite.Name);
+                TaskManager.WriteParameter("SiteItemId", siteId);
+                TaskManager.WriteParameter("WebSite.Name", webSite.Name);
+                TaskManager.WriteParameter("hostName", hostName);
+                TaskManager.WriteParameter("SANs", string.Join(",", SANs));
+                WebServer webServer = GetWebServer(webSite.ServiceId);
+                PackageInfo package = PackageController.GetPackage(webSite.PackageId);
+                UserInfoInternal user = UserController.GetUser(package.UserId);
+                TaskManager.WriteParameter("vaultProfile", user.Username);
+                TaskManager.WriteParameter("email", user.Email);
+                WebSite strHttpRedirect = GetWebSite(siteId);
+                string friendlyName = webSite.Name + " - " + DateTime.Now.ToShortDateString();
+                // Remove HTTP Redirection otherwise the SSL can't be verified
+                if (webSite.HttpRedirect != null)
                 {
-                    WebSite webSite = WebServerController.GetWebSite(siteId);
-                    TaskManager.StartTask("WEB", "InstallLetsEncryptCertificate", webSite.Name);
-                    TaskManager.WriteParameter("hostName", hostName);
-                    TaskManager.WriteParameter("SANs", string.Join(",", SANs));
-                    WebServer webServer = WebServerController.GetWebServer(webSite.ServiceId);
-                    PackageInfo package = PackageController.GetPackage(webSite.PackageId);
-                    UserInfoInternal user = UserController.GetUser(package.UserId);
-                    TaskManager.WriteParameter("vaultProfile", user.Username);
-                    TaskManager.WriteParameter("email", user.Email);
-                    LetsEncryptResult letsEncryptResult = webServer.InstallLetsEncryptCertificate(webSite, hostName, SANs, user.Username, user.Email);
-                    if (!letsEncryptResult.IsSuccess)
+                    TaskManager.WriteParameter("Disable HttpRedirect to ", webSite.HttpRedirect);
+                    strHttpRedirect.HttpRedirect = null;
+                    strHttpRedirect.RedirectDirectoryBelow = false;
+                    strHttpRedirect.RedirectExactUrl = false;
+                    strHttpRedirect.RedirectPermanent = false;
+                    UpdateWebSite(strHttpRedirect);
+                }
+                LetsEncryptResult letsEncryptResult = webServer.InstallLetsEncryptCertificate(webSite, hostName, SANs, user.Username, user.Email);
+                if (letsEncryptResult.IsSuccess)
+                {
+                    installresult.Value = letsEncryptResult.Value;
+                    ResultObject resultObject = InstallPfx(letsEncryptResult.Certificate, siteId, string.Empty, friendlyName, string.Join(",", SANs), true);
+                    if (resultObject.IsSuccess)
                     {
-                        stringArrayResultObject.IsSuccess = false;
-                        stringArrayResultObject.ErrorCodes = new List<string>(letsEncryptResult.ErrorCodes);
-                        stringArrayResultObject.Value = letsEncryptResult.Value;
+                        // Set the redirect back if it was set before
+                        if (webSite.HttpRedirect != null)
+                        {
+                            TaskManager.WriteParameter("ReEnable HttpRedirect  to ", webSite.HttpRedirect);
+                            strHttpRedirect.HttpRedirect = webSite.HttpRedirect;
+                            strHttpRedirect.RedirectDirectoryBelow = webSite.RedirectDirectoryBelow;
+                            strHttpRedirect.RedirectExactUrl = webSite.RedirectExactUrl;
+                            strHttpRedirect.RedirectPermanent = webSite.RedirectPermanent;
+                            UpdateWebSite(strHttpRedirect);
+                        }
                     }
                     else
                     {
-                        stringArrayResultObject.Value = letsEncryptResult.Value;
-                        ResultObject resultObject = WebServerController.InstallPfx(letsEncryptResult.Certificate, siteId, string.Empty, true);
-                        if (!resultObject.IsSuccess)
-                        {
-                            stringArrayResultObject.IsSuccess = false;
-                            stringArrayResultObject.AddError(resultObject.ErrorCodes.First<string>(), null);
-                            TaskManager.WriteError("Unable to install PFX in IIS", new string[0]);
-                        }
+                        installresult.IsSuccess = false;
+                        installresult.AddError(resultObject.ErrorCodes.First<string>(), null);
+                        TaskManager.WriteError("Unable to install PFX in IIS", new string[0]);
                     }
                 }
-                catch (Exception exception1)
+                else
                 {
-                    Exception exception = exception1;
-                    stringArrayResultObject.IsSuccess = false;
-                    stringArrayResultObject.AddError("LETS_ENCRYPT_INSTALL", exception);
-                    TaskManager.WriteError(exception);
+                    installresult.IsSuccess = false;
+                    installresult.ErrorCodes = new List<string>(letsEncryptResult.ErrorCodes);
+                    installresult.Value = letsEncryptResult.Value;
                 }
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                installresult.IsSuccess = false;
+                installresult.AddError("LETS_ENCRYPT_INSTALL", exception);
+                TaskManager.WriteError(exception);
             }
             finally
             {
                 TaskManager.CompleteTask();
             }
-            return stringArrayResultObject;
+            return installresult;
         }
 
         public static StringArrayResultObject RenewLetsEncryptCertificate(SSLCertificate certificate)
         {
-            StringArrayResultObject stringArrayResultObject = new StringArrayResultObject()
-            {
-                IsSuccess = true
-            };
+            StringArrayResultObject stringArrayResultObject = new StringArrayResultObject { IsSuccess = true };
             try
             {
-                try
-                {
-                    TaskManager.StartTask("WEB", "RenewLetsEncryptCertificate", certificate.SiteID);
-                    TaskManager.WriteParameter("hostName", certificate.Hostname);
-                    TaskManager.WriteParameter("SANs", certificate.SAN);
-                    string[] strArrays = certificate.SAN.Split(new char[] { ',' });
-                    WebSite webSite = WebServerController.GetWebSite(certificate.SiteID);
-                    WebServer webServer = WebServerController.GetWebServer(webSite.ServiceId);
-                    PackageInfo package = PackageController.GetPackage(webSite.PackageId);
-                    UserInfoInternal user = UserController.GetUser(package.UserId);
-                    TaskManager.WriteParameter("vaultProfile", user.Username);
-                    TaskManager.WriteParameter("email", user.Email);
-                    LetsEncryptResult letsEncryptResult = webServer.InstallLetsEncryptCertificate(webSite, certificate.Hostname, strArrays, user.Username, user.Email);
-                    if (!letsEncryptResult.IsSuccess)
-                    {
-                        stringArrayResultObject.IsSuccess = false;
-                        stringArrayResultObject.AddError(letsEncryptResult.ErrorCodes.First<string>(), null);
-                        stringArrayResultObject.Value = letsEncryptResult.Value;
-                    }
-                    else
-                    {
-                        ResultObject resultObject = WebServerController.InstallPfx(letsEncryptResult.Certificate, certificate.SiteID, string.Empty, true);
-                        if (!resultObject.IsSuccess)
-                        {
-                            stringArrayResultObject.IsSuccess = false;
-                            stringArrayResultObject.AddError(resultObject.ErrorCodes.First<string>(), null);
-                            TaskManager.WriteError("Unable to install PFX in IIS", new string[0]);
-                        }
-                    }
-                }
-                catch (Exception exception1)
-                {
-                    Exception exception = exception1;
-                    stringArrayResultObject.IsSuccess = false;
-                    stringArrayResultObject.AddError("LETS_ENCRYPT_INSTALL", exception);
-                    TaskManager.WriteError(exception);
-                }
+                WebSite webSite = WebServerController.GetWebSite(certificate.SiteID);
+                TaskManager.StartTask("WEB", "Renew LetsEncrypt Certificate", certificate.Hostname);
+                DeleteCertificate(certificate.SiteID, certificate);
+                InstallLetsEncryptCertificate(certificate.SiteID, certificate.Hostname, certificate.SAN.Split(new char[] { ',' }));
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                stringArrayResultObject.IsSuccess = false;
+                stringArrayResultObject.AddError("LETS_ENCRYPT_RENEW", exception);
+                TaskManager.WriteError(exception);
             }
             finally
             {
@@ -4690,7 +4682,7 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
             throw new NotSupportedException();
         }
 
-        public static ResultObject InstallPfx(byte[] pfx, int siteItemId, string password, bool isLetsEncryptCertificate = false)
+        public static ResultObject InstallPfx(byte[] pfx, int siteItemId, string password, string friendlyName = "", string SANs = "", bool isLetsEncryptCertificate = false)
 		{
 			ResultObject result = new ResultObject { IsSuccess = true };
 			try
@@ -4709,7 +4701,7 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
                 // Get certificateinfo to delete from metabase later, SCP expects only one active certificate for each site
                 var certificatesToDeleteFromMetaBase = GetCertificatesForSite(item.Id).Where(c => c.Installed).ToList();
 
-				SSLCertificate certificate = server.installPFX(pfx, password, item);
+				SSLCertificate certificate = server.installPFX(pfx, password, item, friendlyName, SANs);
 				if (certificate.SerialNumber == null)
 				{
 					result.AddError("Error_Installing_certificate", null);
@@ -4719,8 +4711,8 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
                 if (result.IsSuccess)
                 {
                     DataProvider.AddPFX(SecurityContext.User.UserId, item.PackageId, item.Id, service.UserId, certificate.Hostname,
-                       certificate.FriendlyName, certificate.DistinguishedName, certificate.CSRLength, certificate.SerialNumber,
-                       certificate.ValidFrom, certificate.ExpiryDate, isLetsEncryptCertificate, certificate.SAN);
+                       friendlyName, certificate.DistinguishedName, certificate.CSRLength, certificate.SerialNumber,
+                       certificate.ValidFrom, certificate.ExpiryDate, isLetsEncryptCertificate, SANs);
 
                     foreach (var certificateToDeleteFromMetaBase in certificatesToDeleteFromMetaBase)
                     {

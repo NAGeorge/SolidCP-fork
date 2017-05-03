@@ -1707,12 +1707,12 @@ namespace SolidCP.Server
         }
 
         [WebMethod, SoapHeader("settings")]
-		public SSLCertificate installPFX(byte[] certificate, string password, WebSite website)
+		public SSLCertificate installPFX(byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
 		{
 			try
 			{
 				Log.WriteStart("'{0}' installPFX", ProviderSettings.ProviderName);
-				SSLCertificate response = WebProvider.installPFX(certificate, password, website);
+				SSLCertificate response = WebProvider.installPFX(certificate, password, website, friendlyName, SANs);
 
 				if (response.Hash == null)
 				{

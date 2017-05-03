@@ -206,6 +206,9 @@
   <data name="btnRenewText.Text" xml:space="preserve">
     <value>Renew</value>
   </data>
+  <data name="btnRenew.OnClientClick" xml:space="preserve">
+    <value>return confirm('Renew SSL for this web site?');</value>
+  </data>
   <data name="btnShowpnlCSR.Text" xml:space="preserve">
     <value>Generate CSR</value>
   </data>
@@ -294,6 +297,12 @@
     <value>Read Let's Encrypt Terms Of Services</value>
     <comment>LetsEncrypt</comment>
   </data>
+  <data name="SelectHostName.Text" xml:space="preserve">
+    <value>Certificate Subject Name</value>
+  </data>
+  <data name="SelectHostNames.Text" xml:space="preserve">
+    <value>Subject Alternative Name (SAN's)</value>
+  </data>
   <data name="PfxPassword.Text" xml:space="preserve">
     <value>Password:</value>
   </data>
@@ -328,6 +337,9 @@
   </data>
   <data name="sslDomain.Text" xml:space="preserve">
     <value>Domain:</value>
+  </data>
+  <data name="sslSAN.Text" xml:space="preserve">
+    <value>SAN's:</value>
   </data>
   <data name="sslExpiry.Text" xml:space="preserve">
     <value>Expiration Date:</value>
