@@ -212,7 +212,7 @@ namespace SolidCP.Providers.Web.Iis
 			return certificates;
 		}
 
-		public SSLCertificate InstallPfx(byte[] certificate, string password, WebSite website)
+		public SSLCertificate InstallPfx(byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
 		{
 			X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
 			//
@@ -222,6 +222,7 @@ namespace SolidCP.Providers.Web.Iis
 				oldcert = GetCurrentSiteCertificate(website);
 			//
 			X509Certificate2 x509Cert = new X509Certificate2(certificate, password);
+            x509Cert.FriendlyName = friendlyName;
 
 			#region Step 1: Register X.509 certificate in the store
 			// Trying to keep X.509 store open as less as possible

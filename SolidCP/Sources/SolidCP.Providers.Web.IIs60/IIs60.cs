@@ -4402,7 +4402,7 @@ namespace SolidCP.Providers.Web
         {
             throw new NotSupportedException();
         }
-        public virtual SSLCertificate installPFX(byte[] certificate, string password, WebSite website)
+        public virtual SSLCertificate installPFX(byte[] certificate, string password, WebSite website, string friendlyName, string SANs)
 		{
 			throw new NotSupportedException();
 		}

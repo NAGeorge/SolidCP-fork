@@ -176,7 +176,7 @@ namespace SolidCP.Providers.Web
 		SSLCertificate getCertificate(WebSite site);
         // RB Added Below for LetsEncrypt 10/20/2016
         LetsEncryptResult InstallLetsEncryptCertificate(WebSite webSite, string hostName, string[] SANs, string vaultProfile, string email);
-        SSLCertificate installPFX(byte[] certificate, string password, WebSite website);
+        SSLCertificate installPFX(byte[] certificate, string password, WebSite website, string friendlyName, string SANs);
 		byte[] exportCertificate(string serialNumber, string password);
 		List<SSLCertificate> getServerCertificates();
 		ResultObject DeleteCertificate(SSLCertificate certificate, WebSite website);

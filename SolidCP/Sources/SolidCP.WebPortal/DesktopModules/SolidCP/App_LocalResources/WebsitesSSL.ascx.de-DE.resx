@@ -189,6 +189,9 @@
   <data name="sslDomain.Text" xml:space="preserve">
     <value>Domäne:</value>
   </data>
+  <data name="sslSAN.Text" xml:space="preserve">
+    <value>SAN's:</value>
+  </data>
   <data name="sslExpiry.Text" xml:space="preserve">
     <value>Ablaufdatum:</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="SSLNotInstalledHeading.Text" xml:space="preserve">
     <value>SSL nicht installiert</value>
+  </data>
+  <data name="btnRenew.OnClientClick" xml:space="preserve">
+    <value>SSL für diese Website erneuern</value>
   </data>
   <data name="sslOrganization.Text" xml:space="preserve">
     <value>Organisation:</value>
@@ -248,6 +254,16 @@
   </data>
   <data name="GenerateCSR.Text" xml:space="preserve">
     <value>CSR erzeugen</value>
+  </data>
+  <data name="lnkLetsEncryptTOS.Text" xml:space="preserve">
+    <value>Lesen Let'sEncrypt Nutzungsbedingungen</value>
+    <comment>LetsEncrypt</comment>
+  </data>
+  <data name="SelectHostName.Text" xml:space="preserve">
+    <value>Zertifikat Subject Name</value>
+  </data>
+  <data name="SelectHostNames.Text" xml:space="preserve">
+    <value>Thema Alternativer Name(SAN's)</value>
   </data>
   <data name="PfxPassword.Text" xml:space="preserve">
     <value>Passwort:</value>

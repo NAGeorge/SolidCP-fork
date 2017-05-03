@@ -328,7 +328,7 @@ namespace SolidCP.Providers.Web
                 {
                     string str = hostName;
                     DateTime now = DateTime.Now;
-                    identifierRef = string.Concat("SolidCP-", str, now.ToString("s"));
+                    identifierRef = string.Concat("SolidCP-", str, "-", now.ToString("s"));
                     command = new Command("New-ACMEIdentifier");
                     command.Parameters.Add("VaultProfile", this.VaultProfileName);
                     command.Parameters.Add("Dns", hostName);

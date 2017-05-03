@@ -1364,12 +1364,14 @@ namespace SolidCP.EnterpriseServer
         }
 
         /// <remarks/>
-        public System.IAsyncResult BeginInstallPfx(byte[] certificate, int siteItemId, string password, System.AsyncCallback callback, object asyncState)
+        public System.IAsyncResult BeginInstallPfx(byte[] certificate, int siteItemId, string password, string friendlyName, string SANs, System.AsyncCallback callback, object asyncState)
         {
             return this.BeginInvoke("InstallPfx", new object[] {
                         certificate,
                         siteItemId,
-                        password}, callback, asyncState);
+                        password,
+                        friendlyName,
+                        SANs}, callback, asyncState);
         }
 
 
@@ -1386,13 +1388,13 @@ namespace SolidCP.EnterpriseServer
         }
 
         /// <remarks/>
-        public void InstallPfxAsync(byte[] certificate, int siteItemId, string password)
+        public void InstallPfxAsync(byte[] certificate, int siteItemId, string password, string friendlyName, string SANs)
         {
-            this.InstallPfxAsync(certificate, siteItemId, password, null);
+            this.InstallPfxAsync(certificate, siteItemId, password, friendlyName, SANs, null);
         }
 
         /// <remarks/>
-        public void InstallPfxAsync(byte[] certificate, int siteItemId, string password, object userState)
+        public void InstallPfxAsync(byte[] certificate, int siteItemId, string password, string friendlyName, string SANs, object userState)
         {
             if ((this.InstallPfxOperationCompleted == null))
             {
@@ -1401,7 +1403,9 @@ namespace SolidCP.EnterpriseServer
             this.InvokeAsync("InstallPfx", new object[] {
                         certificate,
                         siteItemId,
-                        password}, this.InstallPfxOperationCompleted, userState);
+                        password,
+                        friendlyName,
+                        SANs}, this.InstallPfxOperationCompleted, userState);
         }
 
         

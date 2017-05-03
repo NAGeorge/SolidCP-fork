@@ -163,23 +163,23 @@
 				</div>
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
-                <dir class="row">
-                             <dir class="col-sm-4">
+                        <dir class="col-sm-12">
+                            <dir class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <CPCC:H5Label runat="server" for="ddlHostName" class="control-label"><asp:Localize ID="SelectHostName" runat="server" meta:resourcekey="SelectHostName" /></CPCC:H5Label>
                                     <asp:DropDownList ID="ddlHostName" Runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlHostName_OnSelectedIndexChanged"></asp:DropDownList>
-                                    </div>
+                                </div>
                             </dir>
-                            <dir class="col-sm-4">
+                            <dir class="col-xs-12 col-md-7 col-md-offset-1">
                                 <div class="form-group">
                                     <CPCC:H5Label runat="server" for="ddlHostName" class="control-label"><asp:Localize ID="SelectHostNames" runat="server" meta:resourcekey="SelectHostNames" /></CPCC:H5Label>
-                                    <asp:ListBox id="lbSANs" Runat="server" SelectionMode="Multiple" Height="100" CssClass="list-group"></asp:ListBox>
-                                    </div>
+                                    <asp:ListBox id="lbSANs" Runat="server" SelectionMode="Multiple" Height="100" CssClass="form-control"></asp:ListBox>
+                                </div>
                             </dir>
                         </dir>
-                        </ContentTemplate>
+                    </ContentTemplate>
                 </asp:UpdatePanel>
-				<div style="width: 300px; margin: 2px auto;">
+				<div class="form-group text-center">
    					<CPCC:StyleButton ID="btnLetsEncrypt" meta:resourcekey="btnLetsEncrypt" CssClass="btn btn-primary" runat="server" OnClick="btnLetsEncrypt_click" />
 				</div>
 			</asp:Panel>
