@@ -4585,18 +4585,13 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
             try
             {
                 WebSite webSite = GetWebSite(siteId);
-                TaskManager.StartTask("LOG_SOURCE_WEB", "Install LetsEncrypt Certificate", webSite.Name);
-                TaskManager.WriteParameter("SiteItemId", siteId);
-                TaskManager.WriteParameter("WebSite.Name", webSite.Name);
-                TaskManager.WriteParameter("hostName", hostName);
-                TaskManager.WriteParameter("SANs", string.Join(",", SANs));
                 WebServer webServer = GetWebServer(webSite.ServiceId);
                 PackageInfo package = PackageController.GetPackage(webSite.PackageId);
                 UserInfoInternal user = UserController.GetUser(package.UserId);
-                TaskManager.WriteParameter("vaultProfile", user.Username);
-                TaskManager.WriteParameter("email", user.Email);
                 WebSite strHttpRedirect = GetWebSite(siteId);
                 string friendlyName = webSite.Name + " - " + DateTime.Now.ToShortDateString();
+                TaskManager.StartTask(LOG_SOURCE_WEB, "Install LetsEncrypt Certificate", hostName);
+                TaskManager.WriteParameter("WebSite.Name", webSite.Name);
                 // Remove HTTP Redirection otherwise the SSL can't be verified
                 if (webSite.HttpRedirect != null)
                 {
@@ -4659,7 +4654,7 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
             try
             {
                 WebSite webSite = WebServerController.GetWebSite(certificate.SiteID);
-                TaskManager.StartTask("WEB", "Renew LetsEncrypt Certificate", certificate.Hostname);
+                TaskManager.StartTask(LOG_SOURCE_WEB, "Renew LetsEncrypt Certificate", certificate.Hostname);
                 DeleteCertificate(certificate.SiteID, certificate);
                 InstallLetsEncryptCertificate(certificate.SiteID, certificate.Hostname, certificate.SAN.Split(new char[] { ',' }));
             }
@@ -4687,16 +4682,17 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
 			ResultObject result = new ResultObject { IsSuccess = true };
 			try
 			{
-				TaskManager.StartTask(LOG_SOURCE_WEB, "installPFX");
-				TaskManager.WriteParameter("SiteItemId", siteItemId);
-
-				WebSite item = GetWebSite(siteItemId) as WebSite;
+                TaskManager.StartTask(LOG_SOURCE_WEB, "installPFX");
+                WebSite item = GetWebSite(siteItemId) as WebSite;
 				PackageInfo service = PackageController.GetPackage(item.PackageId);
-
-				TaskManager.WriteParameter("WebSite.Name", item.Name);
-				WebServer server = GetWebServer(item.ServiceId);
+                UserInfoInternal user = UserController.GetUser(service.UserId);
+                WebServer server = GetWebServer(item.ServiceId);
+                TaskManager.WriteParameter("SiteItemId", siteItemId);
 				TaskManager.WriteParameter("item.ServiceId", item.ServiceId);
-
+                TaskManager.WriteParameter("WebSite.Name", item.Name);
+                TaskManager.WriteParameter("SANs", SANs);
+                TaskManager.WriteParameter("vaultProfile", user.Username);
+                TaskManager.WriteParameter("email", user.Email);
 
                 // Get certificateinfo to delete from metabase later, SCP expects only one active certificate for each site
                 var certificatesToDeleteFromMetaBase = GetCertificatesForSite(item.Id).Where(c => c.Installed).ToList();
@@ -4787,9 +4783,14 @@ Please ensure the space has been allocated {0} IP address as a dedicated one and
 			ResultObject result = new ResultObject { IsSuccess = true };
 			try
 			{
-				TaskManager.StartTask(LOG_SOURCE_WEB, "DeleteCertificate");
-				WebSite item = GetWebSite(siteId) as WebSite;
-				WebServer server = GetWebServer(item.ServiceId);
+                TaskManager.StartTask(LOG_SOURCE_WEB, "Delete SSL Certificate", certificate.Hostname);
+                WebSite item = GetWebSite(siteId) as WebSite;
+                TaskManager.WriteParameter("SiteItemId", siteId);
+                TaskManager.WriteParameter("item.ServiceId", item.ServiceId);
+                TaskManager.WriteParameter("WebSite Name", item.Name);
+                TaskManager.WriteParameter("Certificate Name", certificate.Hostname);
+                TaskManager.WriteParameter("SANs", certificate.SAN);
+                WebServer server = GetWebServer(item.ServiceId);
 				result = server.DeleteCertificate(certificate, item);
 				if (result.IsSuccess)
 				{
