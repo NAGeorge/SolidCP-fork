@@ -93,7 +93,49 @@ namespace SolidCP.Portal
                         if (fullType.Equals("Mailbox"))
                         {
                             res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
-                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=mailbox_settings",
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=edit_user",
+                                "AccountID=" + accountId, "moduleDefId=ExchangeServer");
+                        }
+                        else if (fullType.Equals("Room"))
+                        {
+                            res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=edit_user",
+                                "AccountID=" + accountId, "moduleDefId=ExchangeServer", "Context=Mailbox");
+                        }
+                        else if (fullType.Equals("Shared Mailbox"))
+                        {
+                            res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=edit_user",
+                                "AccountID=" + accountId, "moduleDefId=ExchangeServer", "Context=Mailbox");
+                        }
+                        else if (fullType.Equals("Equipment"))
+                        {
+                            res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=edit_user",
+                                "AccountID=" + accountId, "moduleDefId=ExchangeServer", "Context=Mailbox");
+                        }
+                        else if (fullType.Equals("Public Folder"))
+                        {
+                            res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=public_folder_settings",
+                                "AccountID=" + accountId, "moduleDefId=ExchangeServer");
+                        }
+                        else if (fullType.Equals("Distribution List"))
+                        {
+                            res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=dlist_settings",
+                                "AccountID=" + accountId, "moduleDefId=ExchangeServer");
+                        }
+                        else if (fullType.Equals("Default Security Group"))
+                        {
+                            res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=secur_group_settings",
+                                "AccountID=" + accountId, "moduleDefId=ExchangeServer");
+                        }
+                        else if (fullType.Equals("Security Group"))
+                        {
+                            res = PortalUtils.NavigatePageURL(PID_SPACE_EXCHANGESERVER, "ItemID", itemId.ToString(),
+                                PortalUtils.SPACE_ID_PARAM + "=" + spaceId, "ctl=secur_group_settings",
                                 "AccountID=" + accountId, "moduleDefId=ExchangeServer");
                         }
                         else
