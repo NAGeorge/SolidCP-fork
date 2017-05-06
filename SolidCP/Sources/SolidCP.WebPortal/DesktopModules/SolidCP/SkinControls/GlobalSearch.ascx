@@ -57,7 +57,7 @@
     });//]]>
 </script>
 
-<asp:Panel runat="server" ID="updatePanelUsers" UpdateMode="Conditional" ChildrenAsTriggers="true" CssClass="SearchQuery navbar-form navbar-right">
+<asp:Panel runat="server" ID="updatePanelUsers" UpdateMode="Conditional" ChildrenAsTriggers="true" CssClass="SearchQuery navbar-form navbar-right" DefaultButton="ImageButton1">
 
 
                     <div class="input-group">
